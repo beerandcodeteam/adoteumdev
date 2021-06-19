@@ -47,14 +47,16 @@
 - **TALL Stack**;
 - **PHP 8.0+**;
 - **Laravel Framework 8.40+**;
-- **Docker with Laravel Sail**;
+- **Laravel Sail (Docker)**;
 - **Laravel Horizon**;
 - **Laravel Echo**;
-- **Pest PHP for tests**;
+- **Laravel Socialite**;
+- **Pest PHP for Tests**;
 - **Redis**;
 - **Maria DB**;
 - **Supervisor**;
 - **SendPulse**;
+- **Bugsnag**;
 - **AWS**.
 
 📝 Note
