@@ -64,7 +64,7 @@
 
 ## Contributing
 
-Thank you for considering contributing to the `AdoteUm.Dev`, the contribution guide can be found in [Contributing Guide](CONTRIBUTING.md).
+Thank you for considering contributing to the `AdoteUm.Dev`, the contribution guide can be found in [Contributing Guide](./.github/CONTRIBUTING.md).
 
 ### New Features and Security Vulnerabilities
 
