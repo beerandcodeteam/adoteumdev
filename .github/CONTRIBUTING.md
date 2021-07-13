@@ -15,7 +15,7 @@ Hi! We at `Beer and Code` are happy that you are interested in contributing to `
 
 Before you begin:
 - Check if your environment meets the established minimum requirements.
-- Have you read the [Contributing Code Conduct](./.github/CODE_OF_CONDUCT.md)?
+- Have you read the [Contributing Code Conduct](./CODE_OF_CONDUCT.md)?
 - Check out the [existing issues](https://github.com/beerandcodeteam/adoteumdev/issues) & see if we accept contributions for your type of issue in our [Discord](https://discord.com/invite/mhyKFgv) or [Telegram](https://t.me/joinchat/HU7jWfEDn9xzgcND).
 
 ## 2. Issue Reporting Guidelines
