@@ -59,25 +59,29 @@
 - **Bugsnag**;
 - **AWS**.
 
+<br />
+
 📝 Note
 > If the subscribers 10K goal is achieved by the end of the playlist, a version of the mobile application will be developed in Flutter.
+
+<br />
 
 ## Contributing
 
 Thank you for considering contributing to the `AdoteUm.Dev`, the contribution guide can be found in [Contributing Guide](./.github/CONTRIBUTING.md).
 
-### New Features and Security Vulnerabilities
-
-If you discover a security vulnerability in `AdoteUm.Dev`, submit an issue to this repository. All security vulnerabilities will be addressed as soon as possible.
-
 ### Code of Conduct
 
 In order to ensure that the `Beer and Code` community is welcoming to all, please review and abide by the [Beer and Code Guide](https://github.com/beerandcodeteam/guia).
+
+<br />
 
 ## Credits
 
 - [Beer and Code](https://github.com/beerandcodeteam)
 - [All Contributors](../../contributors)
+
+<br />
 
 ## License
 

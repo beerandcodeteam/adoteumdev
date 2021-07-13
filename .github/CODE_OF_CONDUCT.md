@@ -13,4 +13,6 @@ Instances of abusive, harassing, or otherwise unacceptable behavior may be repor
 - [Discord](https://discord.com/invite/mhyKFgv)
 - [Telegram](https://t.me/joinchat/HU7jWfEDn9xzgcND)
 
+<br />
+
 This Code of Conduct is adapted from the [Contributor Covenant](http://contributor-covenant.org), version 1.0.0, available at [http://contributor-covenant.org/version/1/0/0/](http://contributor-covenant.org/version/1/0/0/)
