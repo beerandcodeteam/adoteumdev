@@ -15,12 +15,16 @@
                 quis reiciendis soluta suscipit temporibus vero vitae!
             </p>
 
-            <button class="bg-white p-4 text-grey-100 mt-8 w-full text-sm rounded-full font-bold transform duration-150 active:scale-95">
-                CRIAR UMA CONTA
+            <button class="flex flex-row space-x-2 justify-center items-center bg-white p-4 text-grey-100 w-full text-sm rounded-full mt-8 font-bold transform duration-150 active:scale-95">
+                <img src="{{ asset('assets/logo-google.png') }}" height="15" width="15" />
+                <span>Entrar como Recrutador</span>
             </button>
 
-            <button class="border-solid border-white border-2 p-4 text-white mt-4 w-full text-sm rounded-full mb-8 font-bold transform duration-150 active:scale-95">
-                CRIAR UMA CONTA
+            <button
+                class="flex flex-row space-x-2 justify-center items-center border-white border-2 border-solid p-4 text-white mb-8 mt-4 w-full text-sm rounded-full font-bold transform duration-150 active:scale-95"
+            >
+                <img src="{{ asset('assets/logo-github.svg') }}" height="15" width="15" />
+                <span>Entrar como Dev</span>
             </button>
         </div>
     </div>
