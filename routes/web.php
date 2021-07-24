@@ -11,6 +11,7 @@ use App\Http\Livewire\Auth\Verify;
 use App\Http\Livewire\Components\HomeScreen;
 use App\Http\Livewire\Components\SplashScreen;
 use Illuminate\Support\Facades\Route;
+use Laravel\Socialite\Facades\Socialite;
 
 
 Route::get('/', SplashScreen::class)->name('app.splash');
@@ -46,4 +47,15 @@ Route::middleware('auth')->group(function () {
 
     Route::post('logout', LogoutController::class)
         ->name('logout');
+});
+
+
+Route::get('/auth/redirect', function () {
+    return Socialite::driver('github')->redirect();
+})->name('socialite.redirect-github');
+
+Route::get('/auth/github', function () {
+    $user = Socialite::driver('github')->user();
+
+    dd($user, $user->token);
 });
