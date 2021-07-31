@@ -15,12 +15,12 @@
                 quis reiciendis soluta suscipit temporibus vero vitae!
             </p>
 
-            <button class="flex flex-row space-x-2 justify-center items-center bg-white p-4 text-grey-100 w-full text-sm rounded-full mt-8 font-bold transform duration-150 active:scale-95">
+            <button wire:click="loginWithGoogle" class="flex flex-row space-x-2 justify-center items-center bg-white p-4 text-grey-100 w-full text-sm rounded-full mt-8 font-bold transform duration-150 active:scale-95">
                 <img src="{{ asset('assets/logo-google.png') }}" height="15" width="15" />
                 <span>Entrar como Recrutador</span>
             </button>
 
-            <button
+            <button wire:click="loginWithGithub"
                 class="flex flex-row space-x-2 justify-center items-center border-white border-2 border-solid p-4 text-white mb-8 mt-4 w-full text-sm rounded-full font-bold transform duration-150 active:scale-95"
             >
                 <img src="{{ asset('assets/logo-github.svg') }}" height="15" width="15" />
