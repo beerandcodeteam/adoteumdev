@@ -1,15 +1,11 @@
 <?php
 
-use App\Http\Controllers\Auth\EmailVerificationController;
 use App\Http\Controllers\Auth\GithubController;
-use App\Http\Controllers\Auth\LogoutController;
-use App\Http\Livewire\Auth\Login;
-use App\Http\Livewire\Auth\Passwords\Confirm;
-use App\Http\Livewire\Auth\Passwords\Email;
-use App\Http\Livewire\Auth\Passwords\Reset;
-use App\Http\Livewire\Auth\Register;
-use App\Http\Livewire\Auth\Verify;
+use App\Http\Controllers\Auth\GoogleController;
+use App\Http\Livewire\Components\DevelopersScreen;
 use App\Http\Livewire\Components\HomeScreen;
+use App\Http\Livewire\Components\InterestScreen;
+use App\Http\Livewire\Components\PreferenceScreen;
 use App\Http\Livewire\Components\SplashScreen;
 use Illuminate\Support\Facades\Route;
 use Laravel\Socialite\Facades\Socialite;
@@ -17,11 +13,11 @@ use Laravel\Socialite\Facades\Socialite;
 Route::get('/', SplashScreen::class)->name('app.splash');
 Route::get('home', HomeScreen::class)->name('app.home');
 
-// 1 - Criar a rota para carregar a tela de interesses
+Route::get('interesses', InterestScreen::class)->name('app.interest');
 
-// 2 - Criar a rota para carregar a tela de preferências
+Route::get('preferencias', PreferenceScreen::class)->name('app.preference');
 
-// 3 - Criar a rota para carregar a tela de listagem de desenvolvedores
+Route::get('desenvolvedores', DevelopersScreen::class)->name('app.developers');
 
 
 Route::get('/auth/redirect', function () {
@@ -29,3 +25,10 @@ Route::get('/auth/redirect', function () {
 })->name('socialite.redirect-github');
 
 Route::get('/auth/github', GithubController::class);
+
+
+Route::get('/google/redirect', function () {
+    return Socialite::driver('google')->redirect();
+})->name('socialite.redirect-google');
+
+Route::get('/auth/google', GoogleController::class);
