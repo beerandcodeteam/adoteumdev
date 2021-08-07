@@ -31,5 +31,6 @@
         @yield('body')
 
         @livewireScripts
+        @yield('scripts')
     </body>
 </html>
