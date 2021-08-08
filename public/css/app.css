@@ -695,17 +695,6 @@ input:invalid, textarea:invalid, select:invalid {
  * This injects all of Tailwind's utility classes, generated based on your
  * config file.
  */
-.sr-only {
-	position: absolute;
-	width: 1px;
-	height: 1px;
-	padding: 0;
-	margin: -1px;
-	overflow: hidden;
-	clip: rect(0, 0, 0, 0);
-	white-space: nowrap;
-	border-width: 0;
-}
 .absolute {
 	position: absolute;
 }
@@ -734,6 +723,15 @@ input:invalid, textarea:invalid, select:invalid {
 	margin-left: auto;
 	margin-right: auto;
 }
+.mt-1 {
+	margin-top: 0.25rem;
+}
+.mb-4 {
+	margin-bottom: 1rem;
+}
+.mt-3 {
+	margin-top: 0.75rem;
+}
 .mt-6 {
 	margin-top: 1.5rem;
 }
@@ -743,9 +741,6 @@ input:invalid, textarea:invalid, select:invalid {
 .mt-8 {
 	margin-top: 2rem;
 }
-.mt-1 {
-	margin-top: 0.25rem;
-}
 .ml-2 {
 	margin-left: 0.5rem;
 }
@@ -754,9 +749,6 @@ input:invalid, textarea:invalid, select:invalid {
 }
 .mr-3 {
 	margin-right: 0.75rem;
-}
-.mt-3 {
-	margin-top: 0.75rem;
 }
 .mb-24 {
 	margin-bottom: 6rem;
@@ -779,9 +771,6 @@ input:invalid, textarea:invalid, select:invalid {
 .-ml-px {
 	margin-left: -1px;
 }
-.mb-4 {
-	margin-bottom: 1rem;
-}
 .block {
 	display: block;
 }
@@ -800,11 +789,17 @@ input:invalid, textarea:invalid, select:invalid {
 .hidden {
 	display: none;
 }
-.h-16 {
-	height: 4rem;
+.h-6 {
+	height: 1.5rem;
+}
+.h-8 {
+	height: 2rem;
 }
 .h-4 {
 	height: 1rem;
+}
+.h-16 {
+	height: 4rem;
 }
 .h-14 {
 	height: 3.5rem;
@@ -812,38 +807,32 @@ input:invalid, textarea:invalid, select:invalid {
 .h-5 {
 	height: 1.25rem;
 }
-.h-6 {
-	height: 1.5rem;
-}
-.h-8 {
-	height: 2rem;
-}
 .min-h-screen {
 	min-height: 100vh;
-}
-.w-auto {
-	width: auto;
 }
 .w-full {
 	width: 100%;
 }
+.w-16 {
+	width: 4rem;
+}
+.w-6 {
+	width: 1.5rem;
+}
+.w-8 {
+	width: 2rem;
+}
 .w-4 {
 	width: 1rem;
+}
+.w-auto {
+	width: auto;
 }
 .w-14 {
 	width: 3.5rem;
 }
 .w-5 {
 	width: 1.25rem;
-}
-.w-6 {
-	width: 1.5rem;
-}
-.w-16 {
-	width: 4rem;
-}
-.w-8 {
-	width: 2rem;
 }
 .flex-1 {
 	flex: 1 1 0%;
@@ -914,16 +903,6 @@ input:invalid, textarea:invalid, select:invalid {
 .gap-5 {
 	gap: 1.25rem;
 }
-.space-x-2 > :not([hidden]) ~ :not([hidden]) {
-	--tw-space-x-reverse: 0;
-	margin-right: calc(0.5rem * var(--tw-space-x-reverse));
-	margin-left: calc(0.5rem * calc(1 - var(--tw-space-x-reverse)));
-}
-.space-y-2 > :not([hidden]) ~ :not([hidden]) {
-	--tw-space-y-reverse: 0;
-	margin-top: calc(0.5rem * calc(1 - var(--tw-space-y-reverse)));
-	margin-bottom: calc(0.5rem * var(--tw-space-y-reverse));
-}
 .space-y-4 > :not([hidden]) ~ :not([hidden]) {
 	--tw-space-y-reverse: 0;
 	margin-top: calc(1rem * calc(1 - var(--tw-space-y-reverse)));
@@ -933,6 +912,16 @@ input:invalid, textarea:invalid, select:invalid {
 	--tw-space-y-reverse: 0;
 	margin-top: calc(0.25rem * calc(1 - var(--tw-space-y-reverse)));
 	margin-bottom: calc(0.25rem * var(--tw-space-y-reverse));
+}
+.space-x-2 > :not([hidden]) ~ :not([hidden]) {
+	--tw-space-x-reverse: 0;
+	margin-right: calc(0.5rem * var(--tw-space-x-reverse));
+	margin-left: calc(0.5rem * calc(1 - var(--tw-space-x-reverse)));
+}
+.space-y-2 > :not([hidden]) ~ :not([hidden]) {
+	--tw-space-y-reverse: 0;
+	margin-top: calc(0.5rem * calc(1 - var(--tw-space-y-reverse)));
+	margin-bottom: calc(0.5rem * var(--tw-space-y-reverse));
 }
 .overflow-hidden {
 	overflow: hidden;
@@ -945,11 +934,11 @@ input:invalid, textarea:invalid, select:invalid {
 .rounded-md {
 	border-radius: 0.375rem;
 }
-.rounded {
-	border-radius: 0.25rem;
-}
 .rounded-full {
 	border-radius: 9999px;
+}
+.rounded {
+	border-radius: 0.25rem;
 }
 .rounded-l-md {
 	border-top-left-radius: 0.375rem;
@@ -981,6 +970,10 @@ input:invalid, textarea:invalid, select:invalid {
 	--tw-border-opacity: 1;
 	border-color: rgba(209, 213, 219, var(--tw-border-opacity));
 }
+.border-gray-200 {
+	--tw-border-opacity: 1;
+	border-color: rgba(229, 231, 235, var(--tw-border-opacity));
+}
 .border-red-300 {
 	--tw-border-opacity: 1;
 	border-color: rgba(252, 165, 165, var(--tw-border-opacity));
@@ -992,17 +985,20 @@ input:invalid, textarea:invalid, select:invalid {
 	--tw-border-opacity: 1;
 	border-color: rgba(255, 255, 255, var(--tw-border-opacity));
 }
-.border-gray-200 {
-	--tw-border-opacity: 1;
-	border-color: rgba(229, 231, 235, var(--tw-border-opacity));
+.bg-white {
+	--tw-bg-opacity: 1;
+	background-color: rgba(255, 255, 255, var(--tw-bg-opacity));
+}
+.bg-pink-600 {
+	--tw-bg-opacity: 1;
+	background-color: rgba(219, 39, 119, var(--tw-bg-opacity));
+}
+.bg-transparent {
+	background-color: transparent;
 }
 .bg-gray-50 {
 	--tw-bg-opacity: 1;
 	background-color: rgba(249, 250, 251, var(--tw-bg-opacity));
-}
-.bg-white {
-	--tw-bg-opacity: 1;
-	background-color: rgba(255, 255, 255, var(--tw-bg-opacity));
 }
 .bg-indigo-600 {
 	--tw-bg-opacity: 1;
@@ -1012,28 +1008,9 @@ input:invalid, textarea:invalid, select:invalid {
 	--tw-bg-opacity: 1;
 	background-color: rgba(16, 185, 129, var(--tw-bg-opacity));
 }
-.bg-grey-50 {
-	--tw-bg-opacity: 1;
-	background-color: rgba(160, 160, 160, var(--tw-bg-opacity));
-}
 .bg-green-50 {
 	--tw-bg-opacity: 1;
 	background-color: rgba(236, 253, 245, var(--tw-bg-opacity));
-}
-.bg-grey-25 {
-	--tw-bg-opacity: 1;
-	background-color: rgba(208, 208, 208, var(--tw-bg-opacity));
-}
-.bg-transparent {
-	background-color: transparent;
-}
-.bg-pink-600 {
-	--tw-bg-opacity: 1;
-	background-color: rgba(219, 39, 119, var(--tw-bg-opacity));
-}
-.bg-primary-100 {
-	--tw-bg-opacity: 1;
-	background-color: rgba(254, 60, 114, var(--tw-bg-opacity));
 }
 .bg-gradient-to-tr {
 	background-image: linear-gradient(to top right, var(--tw-gradient-stops));
@@ -1051,25 +1028,29 @@ input:invalid, textarea:invalid, select:invalid {
 .p-4 {
 	padding: 1rem;
 }
-.py-12 {
-	padding-top: 3rem;
-	padding-bottom: 3rem;
-}
 .px-4 {
 	padding-left: 1rem;
 	padding-right: 1rem;
 }
-.py-8 {
-	padding-top: 2rem;
-	padding-bottom: 2rem;
+.py-5 {
+	padding-top: 1.25rem;
+	padding-bottom: 1.25rem;
+}
+.py-2 {
+	padding-top: 0.5rem;
+	padding-bottom: 0.5rem;
 }
 .px-3 {
 	padding-left: 0.75rem;
 	padding-right: 0.75rem;
 }
-.py-2 {
-	padding-top: 0.5rem;
-	padding-bottom: 0.5rem;
+.py-12 {
+	padding-top: 3rem;
+	padding-bottom: 3rem;
+}
+.py-8 {
+	padding-top: 2rem;
+	padding-bottom: 2rem;
 }
 .py-3 {
 	padding-top: 0.75rem;
@@ -1078,10 +1059,6 @@ input:invalid, textarea:invalid, select:invalid {
 .px-10 {
 	padding-left: 2.5rem;
 	padding-right: 2.5rem;
-}
-.py-5 {
-	padding-top: 1.25rem;
-	padding-bottom: 1.25rem;
 }
 .px-2 {
 	padding-left: 0.5rem;
@@ -1093,16 +1070,13 @@ input:invalid, textarea:invalid, select:invalid {
 .text-center {
 	text-align: center;
 }
-.text-right {
-	text-align: right;
+.text-sm {
+	font-size: 0.875rem;
+	line-height: 1.25rem;
 }
 .text-3xl {
 	font-size: 1.875rem;
 	line-height: 2.25rem;
-}
-.text-sm {
-	font-size: 0.875rem;
-	line-height: 1.25rem;
 }
 .text-2xl {
 	font-size: 1.5rem;
@@ -1116,17 +1090,14 @@ input:invalid, textarea:invalid, select:invalid {
 	font-size: 1.125rem;
 	line-height: 1.75rem;
 }
-.font-extrabold {
-	font-weight: 800;
-}
 .font-medium {
 	font-weight: 500;
 }
+.font-extrabold {
+	font-weight: 800;
+}
 .font-bold {
 	font-weight: 700;
-}
-.uppercase {
-	text-transform: uppercase;
 }
 .leading-9 {
 	line-height: 2.25rem;
@@ -1137,24 +1108,37 @@ input:invalid, textarea:invalid, select:invalid {
 .leading-6 {
 	line-height: 1.5rem;
 }
-.tracking-wide {
-	letter-spacing: 0.025em;
-}
-.text-indigo-600 {
+.text-gray-700 {
 	--tw-text-opacity: 1;
-	color: rgba(79, 70, 229, var(--tw-text-opacity));
+	color: rgba(55, 65, 81, var(--tw-text-opacity));
+}
+.text-white {
+	--tw-text-opacity: 1;
+	color: rgba(255, 255, 255, var(--tw-text-opacity));
 }
 .text-gray-900 {
 	--tw-text-opacity: 1;
 	color: rgba(17, 24, 39, var(--tw-text-opacity));
 }
+.text-grey-50 {
+	--tw-text-opacity: 1;
+	color: rgba(160, 160, 160, var(--tw-text-opacity));
+}
+.text-primary-100 {
+	--tw-text-opacity: 1;
+	color: rgba(254, 60, 114, var(--tw-text-opacity));
+}
+.text-gray-400 {
+	--tw-text-opacity: 1;
+	color: rgba(156, 163, 175, var(--tw-text-opacity));
+}
+.text-indigo-600 {
+	--tw-text-opacity: 1;
+	color: rgba(79, 70, 229, var(--tw-text-opacity));
+}
 .text-gray-600 {
 	--tw-text-opacity: 1;
 	color: rgba(75, 85, 99, var(--tw-text-opacity));
-}
-.text-gray-700 {
-	--tw-text-opacity: 1;
-	color: rgba(55, 65, 81, var(--tw-text-opacity));
 }
 .text-red-900 {
 	--tw-text-opacity: 1;
@@ -1164,10 +1148,6 @@ input:invalid, textarea:invalid, select:invalid {
 	--tw-text-opacity: 1;
 	color: rgba(220, 38, 38, var(--tw-text-opacity));
 }
-.text-white {
-	--tw-text-opacity: 1;
-	color: rgba(255, 255, 255, var(--tw-text-opacity));
-}
 .text-indigo-700 {
 	--tw-text-opacity: 1;
 	color: rgba(67, 56, 202, var(--tw-text-opacity));
@@ -1175,10 +1155,6 @@ input:invalid, textarea:invalid, select:invalid {
 .text-grey-100 {
 	--tw-text-opacity: 1;
 	color: rgba(66, 66, 66, var(--tw-text-opacity));
-}
-.text-primary-100 {
-	--tw-text-opacity: 1;
-	color: rgba(254, 60, 114, var(--tw-text-opacity));
 }
 .text-gray-500 {
 	--tw-text-opacity: 1;
@@ -1191,14 +1167,6 @@ input:invalid, textarea:invalid, select:invalid {
 .text-green-800 {
 	--tw-text-opacity: 1;
 	color: rgba(6, 95, 70, var(--tw-text-opacity));
-}
-.text-gray-400 {
-	--tw-text-opacity: 1;
-	color: rgba(156, 163, 175, var(--tw-text-opacity));
-}
-.text-grey-50 {
-	--tw-text-opacity: 1;
-	color: rgba(160, 160, 160, var(--tw-text-opacity));
 }
 .placeholder-gray-400::-moz-placeholder {
 	--tw-placeholder-opacity: 1;
@@ -1264,9 +1232,13 @@ input:invalid, textarea:invalid, select:invalid {
 	--tw-bg-opacity: 1;
 	background-color: rgba(99, 102, 241, var(--tw-bg-opacity));
 }
-.hover\:bg-indigo-700:hover {
-	--tw-bg-opacity: 1;
-	background-color: rgba(67, 56, 202, var(--tw-bg-opacity));
+.hover\:text-gray-600:hover {
+	--tw-text-opacity: 1;
+	color: rgba(75, 85, 99, var(--tw-text-opacity));
+}
+.hover\:text-gray-500:hover {
+	--tw-text-opacity: 1;
+	color: rgba(107, 114, 128, var(--tw-text-opacity));
 }
 .hover\:text-indigo-500:hover {
 	--tw-text-opacity: 1;
@@ -1276,20 +1248,16 @@ input:invalid, textarea:invalid, select:invalid {
 	--tw-text-opacity: 1;
 	color: rgba(79, 70, 229, var(--tw-text-opacity));
 }
-.hover\:text-gray-500:hover {
-	--tw-text-opacity: 1;
-	color: rgba(107, 114, 128, var(--tw-text-opacity));
-}
 .hover\:text-gray-400:hover {
 	--tw-text-opacity: 1;
 	color: rgba(156, 163, 175, var(--tw-text-opacity));
 }
-.hover\:text-gray-600:hover {
-	--tw-text-opacity: 1;
-	color: rgba(75, 85, 99, var(--tw-text-opacity));
-}
 .focus\:z-10:focus {
 	z-index: 10;
+}
+.focus\:border-indigo-500:focus {
+	--tw-border-opacity: 1;
+	border-color: rgba(99, 102, 241, var(--tw-border-opacity));
 }
 .focus\:border-blue-300:focus {
 	--tw-border-opacity: 1;
@@ -1302,10 +1270,6 @@ input:invalid, textarea:invalid, select:invalid {
 .focus\:border-indigo-700:focus {
 	--tw-border-opacity: 1;
 	border-color: rgba(67, 56, 202, var(--tw-border-opacity));
-}
-.focus\:border-indigo-500:focus {
-	--tw-border-opacity: 1;
-	border-color: rgba(99, 102, 241, var(--tw-border-opacity));
 }
 .focus\:underline:focus {
 	text-decoration: underline;
@@ -1351,12 +1315,6 @@ input:invalid, textarea:invalid, select:invalid {
 	.sm\:col-span-3 {
 		grid-column: span 3 / span 3;
 	}
-	.sm\:col-span-4 {
-		grid-column: span 4 / span 4;
-	}
-	.sm\:col-span-6 {
-		grid-column: span 6 / span 6;
-	}
 	.sm\:mx-auto {
 		margin-left: auto;
 		margin-right: auto;
@@ -1394,9 +1352,6 @@ input:invalid, textarea:invalid, select:invalid {
 	.sm\:rounded-lg {
 		border-radius: 0.5rem;
 	}
-	.sm\:rounded-md {
-		border-radius: 0.375rem;
-	}
 	.sm\:p-6 {
 		padding: 1.5rem;
 	}
@@ -1407,10 +1362,6 @@ input:invalid, textarea:invalid, select:invalid {
 	.sm\:px-10 {
 		padding-left: 2.5rem;
 		padding-right: 2.5rem;
-	}
-	.sm\:px-0 {
-		padding-left: 0px;
-		padding-right: 0px;
 	}
 	.sm\:text-sm {
 		font-size: 0.875rem;
@@ -1424,26 +1375,8 @@ input:invalid, textarea:invalid, select:invalid {
 	.md\:col-span-1 {
 		grid-column: span 1 / span 1;
 	}
-	.md\:col-span-2 {
-		grid-column: span 2 / span 2;
-	}
-	.md\:mt-0 {
-		margin-top: 0px;
-	}
-	.md\:grid {
-		display: grid;
-	}
-	.md\:grid-cols-3 {
-		grid-template-columns: repeat(3, minmax(0, 1fr));
-	}
-	.md\:gap-6 {
-		gap: 1.5rem;
-	}
 }
 @media (min-width: 1024px) {
-	.lg\:col-span-2 {
-		grid-column: span 2 / span 2;
-	}
 	.lg\:grid-cols-4 {
 		grid-template-columns: repeat(4, minmax(0, 1fr));
 	}
