@@ -94,7 +94,7 @@ $ git clone git@github.com:beerandcodeteam/adoteumdev.git
 After cloning the repository, enter the project folder and run:
 
 ```bash
-$ ./sail build
+$ ./sail config
 ```
 
 📝 Note
@@ -103,7 +103,7 @@ $ ./sail build
 <br />
 
 ### 5.3. Create the Environment
-Once all `composer` dependencies are installed, effectively create the Docker development environment with the command below:
+Once all `composer` and `npm` dependencies are installed, effectively create the Docker development environment with the command below:
 
 ```bash
 $ ./sail init

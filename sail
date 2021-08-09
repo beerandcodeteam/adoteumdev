@@ -18,19 +18,6 @@ if [ "$MACHINE" == "UNKNOWN" ]; then
     exit 1
 fi
 
-# Define environment variables...
-export APP_PORT=${APP_PORT:-80}
-export APP_SERVICE=${APP_SERVICE:-"laravel.test"}
-export DB_PORT=${DB_PORT:-3306}
-export WWWUSER=${WWWUSER:-$UID}
-export WWWGROUP=${WWWGROUP:-$(id -g)}
-
-if [ "$MACHINE" == "linux" ]; then
-    export SEDCMD="sed -i"
-elif [ "$MACHINE" == "mac" ]; then
-    export SEDCMD="sed -i .bak"
-fi
-
 # Ensure that Docker is running...
 if ! docker info > /dev/null 2>&1; then
     echo -e "${WHITE}Docker is not running.${NC}" >&2
@@ -38,36 +25,12 @@ if ! docker info > /dev/null 2>&1; then
     exit 1
 fi
 
-# Determine if Sail is currently up...
-PSRESULT="$(docker-compose ps -q)"
-
-if docker-compose ps | grep 'Exit'; then
-    echo -e "${WHITE}Shutting down old Sail processes...${NC}" >&2
-
-    docker-compose down > /dev/null 2>&1
-
-    EXEC="no"
-elif [ -n "$PSRESULT" ]; then
-    EXEC="yes"
-else
-    EXEC="no"
-fi
-
-# Function that outputs Sail is not running...
-function sail_is_not_running {
-    echo -e "${WHITE}Sail is not running.${NC}" >&2
-    echo "" >&2
-    echo -e "${WHITE}You may Sail using the following commands:${NC} './vendor/bin/sail up' or './vendor/bin/sail up -d'" >&2
-
-    exit 1
-}
-
 # Source the ".env" file so Laravel's environment variables are available...
 if [ -f ./.env ]; then
     source ./.env
 fi
 
-if [ "$1" == "build" ]; then
+if [ "$1" == "config" ]; then
 
     ENVFILE='./.env'
 
@@ -93,7 +56,7 @@ elif [ "$1" == "init" ]; then
 
         docker-compose up --build --force-recreate -d
 
-# Pass unknown commands to the "docker-compose" binary...
+
 else
     ./vendor/bin/sail "$@"
 fi
