@@ -67,7 +67,6 @@ if [ -f ./.env ]; then
     source ./.env
 fi
 
-# Proxy Composer command to the "init" option on the core-laravel container...
 if [ "$1" == "build" ]; then
 
     ENVFILE='./.env'
