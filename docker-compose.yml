@@ -54,6 +54,8 @@ services:
           timeout: 5s
     meilisearch:
         image: 'getmeili/meilisearch:latest'
+        environment:
+            MEILI_MASTER_KEY: '${MEILI_MASTER_KEY}'
         ports:
             - '${FORWARD_MEILISEARCH_PORT:-7700}:7700'
         volumes:
