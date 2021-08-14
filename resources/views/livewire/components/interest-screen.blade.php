@@ -8,7 +8,7 @@
         </div>
         <div class="mt-5">
             <form class="space-y-4">
-                <x-start-form :categories="$categories" />
+                <x-start-form />
             </form>
         </div>
     </div>
