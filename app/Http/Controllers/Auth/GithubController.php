@@ -24,10 +24,11 @@ class GithubController extends Controller
             $user = Socialite::driver('github')->user();
 
             DB::transaction(function() use($user) {
+
                 $this->authUser = User::updateOrCreate([
                     'email' => $user->email,
                 ], [
-                    'name' => $user->name,
+                    'name' => $user->name ?? $user->nickname,
                     'password' => Hash::make(Str::random(7)),
                 ])->load('interest', 'preference');
 

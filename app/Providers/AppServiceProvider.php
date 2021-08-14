@@ -27,6 +27,5 @@ class AppServiceProvider extends ServiceProvider
         if (app()->environment('local')) {
             Auth::loginUsingId(1);
         }
-
     }
 }

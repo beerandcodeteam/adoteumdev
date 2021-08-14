@@ -3,7 +3,7 @@ export default (params) => ({
     wire:       null,
     refs:       null,
     categories: params.categories,
-    payload:    {},
+    payload:    params.payload,
     init($dispatch, $wire, $refs) {
         this.dispatch = $dispatch;
         this.wire     = $wire;
@@ -12,6 +12,11 @@ export default (params) => ({
     changeSkill(selectedCategory, event, el) {
         const category = this.categories.find((item) => item.name === selectedCategory)
         const skill = category.skills.find(item => item.id === parseInt(event.target.value))
+
+        if (!this.payload) {
+            this.payload = {}
+        }
+
         if (this.payload.hasOwnProperty(selectedCategory)) {
             this.payload[selectedCategory].push({
                 ...skill,

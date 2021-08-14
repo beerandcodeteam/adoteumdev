@@ -10,6 +10,7 @@ class InterestScreen extends Component
 
     public $user;
     public $categories;
+    public $payload;
 
     public function mount() {
         $this->user = auth()->user()->load('profile')->toArray();
@@ -19,5 +20,11 @@ class InterestScreen extends Component
     public function render()
     {
         return view('livewire.components.interest-screen');
+    }
+
+    public function save() {
+//        dd($this->payload, $this->categories);
+        //TODO::SO ENVIAR SE O CARA FOR DEVELOPERMENT
+        return redirect()->route('app.preference');
     }
 }

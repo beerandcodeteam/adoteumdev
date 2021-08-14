@@ -1,5 +1,5 @@
-import interestForm from './interest-form';
+import startForm from './start-form';
 
 window.$components = {
-    interestForm,
+    startForm,
 };

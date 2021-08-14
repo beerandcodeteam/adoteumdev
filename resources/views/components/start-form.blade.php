@@ -1,6 +1,7 @@
 
-<div x-data="$components.interestForm({
-                categories: @entangle('categories')
+<div x-data="$components.startForm({
+                categories: @entangle('categories'),
+                payload: @entangle('payload'),
                 })" class="space-y-4"
      x-init="init($dispatch, $wire, $refs)" class="space-y-4 space-x-4 grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3">
     <template
@@ -28,7 +29,7 @@
                         </select>
 
                         <div class="space-y-1">
-                            <template x-if="payload.hasOwnProperty(category.name)">
+                            <template x-if="payload && payload.hasOwnProperty(category.name)">
                                 <template x-for="(skill, index) in payload[category.name]">
                                     <div class="flex flex-col p-y-4">
 
@@ -51,7 +52,7 @@
                                                         </div>
                                                     </div>
 
-                                                    <div class="md:flex-shrink-0 pr-2">
+                                                    <div class="md:flex-shrink-0 flex flex-col items-center">
                                                         <button
                                                             x-on:click.prevent="removeSkill(category.name, index)"
                                                             class="w-8 h-8 bg-white inline-flex items-center justify-center text-gray-400 rounded-full bg-transparent hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
