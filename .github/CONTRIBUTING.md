@@ -94,30 +94,25 @@ $ git clone git@github.com:beerandcodeteam/adoteumdev.git
 After cloning the repository, enter the project folder and run:
 
 ```bash
-$ docker run --rm \
-    -u "$(id -u):$(id -g)" \
-    -v $(pwd):/opt \
-    -w /opt \
-    laravelsail/php80-composer:latest \
-    composer install --ignore-platform-reqs
+$ ./sail config
 ```
 
 📝 Note
-> If you are running the project for the first time, you need to run the above command so that the `composer` dependencies are installed correctly.
+> If you are running the project for the first time, you need to run the above command so that the composer and npm dependencies are installed correctly. Besides, this command will create a .env file for you (if don't exist yet) based on .env.example file.
 
 <br />
 
 ### 5.3. Create the Environment
-Once all `composer` dependencies are installed, effectively create the Docker development environment with the command below:
+Once all `composer` and `npm` dependencies are installed, effectively create the Docker development environment with the command below:
 
 ```bash
-$ sail up -d
+$ ./sail init
 ```
 
 This command will initiate downloads of all the Docker images needed to create the entire development environment established by the Laravel team.
 
 📝 Note
-> In case the Docker images already exist on your workstation, their download will be ignored. 
+> In case the Docker images already exist on your workstation, their download will be ignored and if the application image's Dockerfile is changed, this command will rebuild the image before executing the container.
 
 After all Docker images have been downloaded, all containers will be started, thus ending the development environment creation cycle.
 
@@ -127,8 +122,7 @@ After all Docker images have been downloaded, all containers will be started, th
 Now that the development environment has been built, we need to compile the assets so that (`styles, scripts, etc`)  are handled and published. To do this, just run the following command:
 
 ```bash
-$ sail npm install
-$ sail npm run dev
+$ ./sail npm run dev
 ```
 
 <br />
