@@ -4,16 +4,16 @@
 >
     <div
         x-ref="slidecontainer"
-        class="absolute top-0 left-0 transform duration-1000 flex flex-col items-center justify-center min-h-screen w-full bg-gradient-to-tr from-primary-100 to-secondary-100"
+        class="z-50 absolute top-0 left-0 transform duration-1000 flex flex-col items-center justify-center min-h-screen w-full bg-gradient-to-tr from-primary-100 to-secondary-100"
     >
-        <div class="flex flex-col items-center justify-center space-y-2">
-            <img class="w-14 h-14" src="{{ asset('assets/logo-adote-um-dev-white.svg') }}" />
-            <span class="text-white font-bold">AdoteUm.Dev</span>
+        <div class="flex flex-col items-center justify-center space-y-4 text-white">
+            <x-logo class="w-14 h-14 fill-current" />
+            <span class="font-bold">AdoteUm.Dev</span>
         </div>
     </div>
 
-    <div class="flex flex-col items-center justify-center min-h-screen w-full">
-        <img x-ref="logo" class="w-14 h-14 transform scale-0 duration-1000" src="{{ asset('assets/logo-adote-um-dev.svg') }}" />
+    <div class="z-0 flex flex-col items-center justify-center min-h-screen w-full">
+        <x-logo-gradient x-ref="logo" class="w-14 h-14 transform scale-0 duration-1000" />
         <span x-ref="textlogo" class="text-primary-100 font-bold mt-10 transform scale-0 duration-1000">AdoteUm.Dev</span>
     </div>
 </div>
