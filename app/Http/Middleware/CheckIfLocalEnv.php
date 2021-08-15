@@ -10,7 +10,7 @@ class CheckIfLocalEnv
 {
     public function handle(Request $request, Closure $next)
     {
-        if (app()->environment('local')) {
+        if (config('app.env') === 'local') {
             Auth::loginUsingId(1);
 
             return redirect()->route('app.interest');
