@@ -7,12 +7,12 @@ use Livewire\Component;
 
 class InterestScreen extends Component
 {
-
     public $user;
     public $categories;
     public $payload;
 
-    public function mount() {
+    public function mount()
+    {
         $this->user = auth()->user()->load('profile')->toArray();
         $this->categories = Category::with('skills')->get()->toArray();
     }
@@ -22,7 +22,8 @@ class InterestScreen extends Component
         return view('livewire.components.interest-screen');
     }
 
-    public function save() {
+    public function save()
+    {
 //        dd($this->payload, $this->categories);
         //TODO::SO ENVIAR SE O CARA FOR DEVELOPERMENT
         return redirect()->route('app.preference');

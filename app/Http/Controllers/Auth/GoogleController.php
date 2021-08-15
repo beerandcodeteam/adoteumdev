@@ -15,7 +15,7 @@ use Laravel\Socialite\Facades\Socialite;
 
 class GoogleController extends Controller
 {
-    const NAME = 'GOOGLE';
+    public const NAME = 'GOOGLE';
 
     protected User $authUser;
 

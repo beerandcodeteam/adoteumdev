@@ -13,13 +13,13 @@ use Laravel\Socialite\Facades\Socialite;
 Route::get('/', SplashScreen::class)->name('app.splash');
 Route::get('home', HomeScreen::class)->name('app.home');
 
-Route::group(['middleware' => 'auth'], function() {
+Route::group(['middleware' => 'auth'], function () {
     Route::get('interesses', InterestScreen::class)->name('app.interest');
     Route::get('preferencias', PreferenceScreen::class)->name('app.preference');
     Route::get('desenvolvedores', DevelopersScreen::class)->name('app.developers');
 });
 
-Route::group(['prefix' => 'auth', 'as' => 'socialite.'], function() {
+Route::group(['prefix' => 'auth', 'as' => 'socialite.'], function () {
     Route::get('redirect/{driver}', function (string $driver) {
         return Socialite::driver($driver)->redirect();
     })->name('redirect')->middleware('checkIfLocalEnv');

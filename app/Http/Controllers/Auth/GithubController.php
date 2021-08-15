@@ -14,7 +14,7 @@ use Laravel\Socialite\Facades\Socialite;
 
 class GithubController extends Controller
 {
-    const NAME = 'GITHUB';
+    public const NAME = 'GITHUB';
 
     protected User $authUser;
 
@@ -23,8 +23,7 @@ class GithubController extends Controller
         try {
             $user = Socialite::driver('github')->user();
 
-            DB::transaction(function() use($user) {
-
+            DB::transaction(function () use ($user) {
                 $this->authUser = User::updateOrCreate([
                     'email' => $user->email,
                 ], [

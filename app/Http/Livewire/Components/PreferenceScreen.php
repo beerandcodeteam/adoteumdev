@@ -7,12 +7,12 @@ use Livewire\Component;
 
 class PreferenceScreen extends Component
 {
-
     public $user;
     public $categories;
     public $payload;
 
-    public function mount() {
+    public function mount()
+    {
         $this->user = auth()->user()->load('profile')->toArray();
         $this->categories = Category::with('skills')->get()->toArray();
     }
@@ -22,7 +22,8 @@ class PreferenceScreen extends Component
         return view('livewire.components.preference-screen');
     }
 
-    public function save() {
+    public function save()
+    {
         dd("ICARO QUE LUTE", $this->payload);
     }
 }
