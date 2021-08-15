@@ -19,15 +19,12 @@ Route::group(['middleware' => 'auth'], function() {
     Route::get('desenvolvedores', DevelopersScreen::class)->name('app.developers');
 });
 
-Route::get('/auth/redirect', function () {
-    return Socialite::driver('github')->redirect();
-})->name('socialite.redirect-github');
+Route::group(['prefix' => 'auth', 'as' => 'socialite.'], function() {
+    Route::get('redirect/{driver}', function (string $driver) {
+        return Socialite::driver($driver)->redirect();
+    })->name('redirect')->middleware('checkIfLocalEnv');
 
-Route::get('/auth/github', GithubController::class);
+    Route::get('github', GithubController::class)->name('github');
 
-
-Route::get('/google/redirect', function () {
-    return Socialite::driver('google')->redirect();
-})->name('socialite.redirect-google');
-
-Route::get('/auth/google', GoogleController::class);
+    Route::get('google', GoogleController::class)->name('google');
+});
