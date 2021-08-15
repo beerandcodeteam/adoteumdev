@@ -22,10 +22,10 @@ it('checks the Github login button', function(){
 
 it('checks the automatic login in local environment', function(){
     config(['app.env' => 'local']);
-    
+
     $this->seed();
 
-    $redirectGoogle = $this->get('/auth/redirect/google');
+    $redirectGoogle = get('/auth/redirect/google');
 
     $this->followRedirects($redirectGoogle)
         ->assertSeeLivewire(InterestScreen::class);
@@ -34,7 +34,7 @@ it('checks the automatic login in local environment', function(){
 it('checks the automatic login in production environment', function(){
     config(['app.env' => 'production']);
 
-    $redirectGoogle = $this->get('/auth/redirect/google');
+    $redirectGoogle = get('/auth/redirect/google');
 
     $this->followRedirects($redirectGoogle)
         ->assertDontSeeLivewire(InterestScreen::class);
