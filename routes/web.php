@@ -1,7 +1,6 @@
 <?php
 
-use App\Http\Controllers\Auth\GithubController;
-use App\Http\Controllers\Auth\GoogleController;
+use App\Http\Controllers\Auth\SocialiteCallbackController;
 use App\Http\Livewire\Components\DevelopersScreen;
 use App\Http\Livewire\Components\HomeScreen;
 use App\Http\Livewire\Components\InterestScreen;
@@ -24,7 +23,5 @@ Route::group(['prefix' => 'auth', 'as' => 'socialite.'], function () {
         return Socialite::driver($driver)->redirect();
     })->name('redirect')->middleware('checkIfLocalEnv');
 
-    Route::get('github', GithubController::class)->name('github');
-
-    Route::get('google', GoogleController::class)->name('google');
+    Route::get('callback/{driver}', SocialiteCallbackController::class)->name('callback');
 });
