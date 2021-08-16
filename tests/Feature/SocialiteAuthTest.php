@@ -20,7 +20,7 @@ it('checks the Github login button', function(){
         ->assertRedirect('/auth/redirect/github');
 });
 
-it('checks the automatic login in local environment', function(){
+it('checks auth when automatic login is enabled', function(){
     config(['auth.auto_login' => true]);
 
     $this->seed();
@@ -31,7 +31,7 @@ it('checks the automatic login in local environment', function(){
         ->assertSeeLivewire(InterestScreen::class);
 });
 
-it('checks the automatic login in production environment', function(){
+it('checks auth when automatic login is disabled', function(){
     config(['auth.auto_login' => false]);
 
     $redirectGoogle = get('/auth/redirect/google');
