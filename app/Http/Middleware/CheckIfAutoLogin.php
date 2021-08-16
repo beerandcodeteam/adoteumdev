@@ -6,7 +6,7 @@ use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class CheckIfLocalEnv
+class CheckIfAutoLogin
 {
     public function handle(Request $request, Closure $next)
     {

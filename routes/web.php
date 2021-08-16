@@ -21,7 +21,7 @@ Route::group(['middleware' => 'auth'], function () {
 Route::group(['prefix' => 'auth', 'as' => 'socialite.'], function () {
     Route::get('redirect/{driver}', function (string $driver) {
         return Socialite::driver($driver)->redirect();
-    })->name('redirect')->middleware('checkIfLocalEnv');
+    })->name('redirect')->middleware('checkIfAutoLogin');
 
     Route::get('callback/{driver}', SocialiteCallbackController::class)->name('callback');
 });
