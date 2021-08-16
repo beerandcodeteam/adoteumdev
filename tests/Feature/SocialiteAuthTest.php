@@ -21,7 +21,7 @@ it('checks the Github login button', function(){
 });
 
 it('checks the automatic login in local environment', function(){
-    config(['app.env' => 'local']);
+    config(['auth.auto_login' => true]);
 
     $this->seed();
 
@@ -32,7 +32,7 @@ it('checks the automatic login in local environment', function(){
 });
 
 it('checks the automatic login in production environment', function(){
-    config(['app.env' => 'production']);
+    config(['auth.auto_login' => false]);
 
     $redirectGoogle = get('/auth/redirect/google');
 
