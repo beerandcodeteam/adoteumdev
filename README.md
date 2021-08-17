@@ -61,8 +61,12 @@
 
 <br />
 
-📝 Note
-> If the subscribers 10K goal is achieved by the end of the playlist, a version of the mobile application will be developed in Flutter.
+✨ BONUS ✨
+
+AdoteUm.Dev mobile version will be created using Flutter when we reach the goal of 10K subscribers, so:
+
+- SUBSCRIBE ([Youtube](https://www.youtube.com/channel/UCtz8hxpbicBe8REEdEtAYWA))
+- SHARE WITH FRIENDS ([Twitter](https://twitter.com/beerandcodeyt) and [Instagram](https://www.instagram.com/beerandcode_oficial))
 
 <br />
 
