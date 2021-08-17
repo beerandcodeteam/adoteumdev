@@ -79,8 +79,7 @@ Consequently, so that we can maintain compatibility between development environm
 - Npx v7.18.1;
 - Yarn v1.22.5;
 - MySql v8.0.25;
-- Redis v6.2.4;
-- WIP...
+- Redis v6.2.4.
 
 <br />
 
