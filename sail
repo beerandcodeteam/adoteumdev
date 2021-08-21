@@ -42,11 +42,11 @@ if [ "$1" == "config" ]; then
         composer install --ignore-platform-reqs
 
     docker run --rm \
-            -u "$(id -u):$(id -g)" \
-            -v $(pwd):/usr/src/app \
-            -w /usr/src/app \
-            node:16-alpine \
-            npm install
+        -u "$(id -u):$(id -g)" \
+        -v $(pwd):/usr/src/app \
+        -w /usr/src/app \
+        node:16-alpine \
+        npm install
 
     if [ ! -f $ENVFILE ]; then
         cp .env.example .env
@@ -54,8 +54,7 @@ if [ "$1" == "config" ]; then
 
 elif [ "$1" == "init" ]; then
 
-        docker-compose up --build --force-recreate -d
-
+    ./vendor/bin/sail up --build --force-recreate -d
 
 else
     ./vendor/bin/sail "$@"
