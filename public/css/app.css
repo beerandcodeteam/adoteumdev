@@ -1033,13 +1033,13 @@ input:invalid, textarea:invalid, select:invalid {
 	--tw-bg-opacity: 1;
 	background-color: rgba(16, 185, 129, var(--tw-bg-opacity));
 }
-.bg-green-50 {
-	--tw-bg-opacity: 1;
-	background-color: rgba(236, 253, 245, var(--tw-bg-opacity));
-}
 .bg-primary-100 {
 	--tw-bg-opacity: 1;
 	background-color: rgba(254, 60, 114, var(--tw-bg-opacity));
+}
+.bg-green-50 {
+	--tw-bg-opacity: 1;
+	background-color: rgba(236, 253, 245, var(--tw-bg-opacity));
 }
 .bg-gradient-to-tr {
 	background-image: linear-gradient(to top right, var(--tw-gradient-stops));
@@ -1091,9 +1091,6 @@ input:invalid, textarea:invalid, select:invalid {
 }
 .px-2 {
 	padding-left: 0.5rem;
-	padding-right: 0.5rem;
-}
-.pr-2 {
 	padding-right: 0.5rem;
 }
 .text-center {
