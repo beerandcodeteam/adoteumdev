@@ -25,6 +25,7 @@
         "pestphp/pest": "^1.8",
         "pestphp/pest-plugin-laravel": "^1.0",
         "pestphp/pest-plugin-livewire": "^1.0",
+        "pestphp/pest-plugin-mock": "^1.0",
         "phpunit/phpunit": "^9.3.3"
     },
     "autoload": {

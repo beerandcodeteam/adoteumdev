@@ -114,4 +114,17 @@ return [
 
     'password_timeout' => 10800,
 
+    /*
+    |--------------------------------------------------------------------------
+    | Automatic Login
+    |--------------------------------------------------------------------------
+    |
+    | Here you may define if the application will perform an automatic login
+    | to the first database record it finds for users table. If enabled, the
+    | user will be automatically logged in when you hit socialite.redirect route.
+    |
+    */
+
+    'auto_login' => env('AUTH_AUTO_LOGIN', false),
+
 ];

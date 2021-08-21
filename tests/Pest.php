@@ -11,7 +11,7 @@
 |
 */
 
-uses(Tests\TestCase::class)->in('Feature');
+uses(Illuminate\Foundation\Testing\RefreshDatabase::class, Tests\TestCase::class)->in('Feature');
 
 /*
 |--------------------------------------------------------------------------
