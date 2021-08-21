@@ -10,6 +10,8 @@ class Preference extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['user_id', 'data'];
+
     protected $casts = ['data' => 'array'];
 
     public function user(): BelongsTo
