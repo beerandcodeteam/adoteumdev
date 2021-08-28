@@ -11,6 +11,8 @@
 |
 */
 
+use Illuminate\Contracts\Auth\Authenticatable;
+
 uses(Illuminate\Foundation\Testing\RefreshDatabase::class, Tests\TestCase::class)->in('Feature');
 
 /*
@@ -39,7 +41,7 @@ expect()->extend('toBeOne', function () {
 |
 */
 
-function something()
+function actingAs(Authenticatable $user, string $driver = null)
 {
-    // ..
+    return test()->actingAs($user, $driver);
 }

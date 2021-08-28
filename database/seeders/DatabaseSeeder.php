@@ -21,7 +21,7 @@ class DatabaseSeeder extends Seeder
         $categories = ['Linguagens','Frameworks','Idiomas'];
 
         foreach ($categories as $category) {
-            Category::create([
+            Category::updateOrCreate([
                 'name' => $category
             ]);
         }
@@ -76,7 +76,7 @@ class DatabaseSeeder extends Seeder
         ];
 
         foreach ($skills as $skill=>$category) {
-            Skill::create([
+            Skill::updateOrCreate([
                 'name' => $skill,
                 'category_id' => $category
             ]);
@@ -273,13 +273,13 @@ class DatabaseSeeder extends Seeder
         ]);
 
         foreach ($users as $user) {
-            $userInsert = User::create([
+            $userInsert = User::updateOrCreate([
                 'name' => $user->nickname,
                 'email' => strtolower($user->provider_user_id).'@adoteum.dev',
                 'password' => Hash::make('password'),
             ]);
 
-            $profile = Profile::create([
+            $profile = Profile::updateOrCreate([
                 'user_id' => $userInsert->id,
                 'provider' => 'GITHUB',
                 'provider_user_id' => $user->provider_user_id,

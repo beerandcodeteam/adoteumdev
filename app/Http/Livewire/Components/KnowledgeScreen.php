@@ -3,10 +3,10 @@
 namespace App\Http\Livewire\Components;
 
 use App\Models\Category;
-use App\Models\Preference;
+use App\Models\Knowledge;
 use Livewire\Component;
 
-class PreferenceScreen extends Component
+class KnowledgeScreen extends Component
 {
     public $user;
     public $categories;
@@ -15,7 +15,7 @@ class PreferenceScreen extends Component
     public function save()
     {
         try {
-            $this->insertPreferencesData();
+            $this->insertKnowledgeData();
 
             return redirect()->route('app.developers');
         } catch (\Exception $exception) {
@@ -24,9 +24,9 @@ class PreferenceScreen extends Component
         }
     }
 
-    private function insertPreferencesData(): void
+    private function insertKnowledgeData(): void
     {
-        Preference::updateOrCreate([
+        Knowledge::updateOrCreate([
             'user_id' => auth()->user()->id,
         ], [
             'data' => json_encode($this->payload)
@@ -41,6 +41,6 @@ class PreferenceScreen extends Component
 
     public function render()
     {
-        return view('livewire.components.preference-screen');
+        return view('livewire.components.knowledge-screen');
     }
 }
