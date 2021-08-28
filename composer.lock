@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "a581a354597ccc7811e8af406fa5b013",
+    "content-hash": "d7e07c555d6bdf7466048be94e6930ff",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -1105,16 +1105,16 @@
         },
         {
             "name": "laravel-frontend-presets/tall",
-            "version": "v3.1.0",
+            "version": "v4.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel-frontend-presets/tall.git",
-                "reference": "17838bad048ca1adf336bd99d56b0858af3ca020"
+                "reference": "026ef56cc9caf1edec8ffd04b4fe3fd7aff92a8f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel-frontend-presets/tall/zipball/17838bad048ca1adf336bd99d56b0858af3ca020",
-                "reference": "17838bad048ca1adf336bd99d56b0858af3ca020",
+                "url": "https://api.github.com/repos/laravel-frontend-presets/tall/zipball/026ef56cc9caf1edec8ffd04b4fe3fd7aff92a8f",
+                "reference": "026ef56cc9caf1edec8ffd04b4fe3fd7aff92a8f",
                 "shasum": ""
             },
             "require": {
@@ -1172,7 +1172,7 @@
                 "issues": "https://github.com/laravel-frontend-presets/tall/issues",
                 "source": "https://github.com/laravel-frontend-presets/tall"
             },
-            "time": "2021-01-15T09:50:21+00:00"
+            "time": "2021-08-15T20:28:19+00:00"
         },
         {
             "name": "laravel/framework",
