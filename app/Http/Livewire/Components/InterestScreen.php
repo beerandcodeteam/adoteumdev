@@ -4,6 +4,7 @@ namespace App\Http\Livewire\Components;
 
 use App\Models\Category;
 use App\Models\Interest;
+use App\Models\User;
 use Livewire\Component;
 
 class InterestScreen extends Component
@@ -18,7 +19,7 @@ class InterestScreen extends Component
             $this->insertInterestsData();
 
             if (userIsDeveloper()) {
-                return redirect()->route('app.preference');
+                return redirect()->route('app.knowledge');
             }
 
             return redirect()->route('app.developers');
