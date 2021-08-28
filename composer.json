@@ -13,7 +13,8 @@
         "laravel/framework": "^8.40",
         "laravel/socialite": "^5.2",
         "laravel/tinker": "^2.5",
-        "livewire/livewire": "^2.5"
+        "livewire/livewire": "^2.5",
+        "pestphp/pest-plugin-parallel": "^0.3.0"
     },
     "require-dev": {
         "facade/ignition": "^2.5",
