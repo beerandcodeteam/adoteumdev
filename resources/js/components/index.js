@@ -1,5 +1,3 @@
 import startForm from './start-form';
 
-window.$components = {
-    startForm,
-};
+window.startForm = startForm
