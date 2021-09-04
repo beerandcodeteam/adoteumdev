@@ -1,9 +1,9 @@
 
-<div x-data="$components.startForm({
-                categories: @entangle('categories'),
-                payload: @entangle('payload'),
-                })" class="space-y-4"
-     x-init="init($dispatch, $wire, $refs)" class="space-y-4 space-x-4 grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3">
+<div x-data="startForm({
+         categories: @entangle('categories'),
+         payload: @entangle('payload'),
+     })"
+     class="space-y-4 space-x-4 grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3">
     <template
         x-for="category in categories"
     >
