@@ -17,6 +17,14 @@ it('checks if interests url is working', function () {
         ->assertOk();
 });
 
+it('checks if interests list was loaded', function () {
+    $user = User::firstWhere('email', '33piter@adoteum.dev');
+
+    actingAs($user->load('profile'))
+        ->get(route('app.knowledge'))
+        ->assertSee("Assembly");
+});
+
 it('checks if interests form was stored successful', function () {
     $payload = '{"Linguagens":[{"id":1,"category_id":1,"name":"Assembly","level":5}],"Frameworks":[{"id":18,"category_id":2,"name":"Angular.js","level":1}],"Idiomas":[{"id":42,"category_id":3,"name":"Ingl\u00eas","level":2}]}';
 
