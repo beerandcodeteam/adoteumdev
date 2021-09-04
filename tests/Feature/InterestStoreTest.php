@@ -14,7 +14,7 @@ it('checks if interests url is working', function () {
 
     actingAs($user->load('profile'))
         ->get(route('app.interest'))
-        ->assertStatus(200);
+        ->assertOk();
 });
 
 it('checks if interests form was stored successful', function () {
