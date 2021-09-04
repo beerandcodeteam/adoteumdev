@@ -29,7 +29,7 @@ class KnowledgeScreen extends Component
         Knowledge::updateOrCreate([
             'user_id' => auth()->user()->id,
         ], [
-            'data' => json_encode($this->payload)
+            'data' => $this->payload,
         ]);
     }
 

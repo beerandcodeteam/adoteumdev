@@ -34,7 +34,7 @@ class InterestScreen extends Component
         Interest::updateOrCreate([
             'user_id' => auth()->user()->id,
         ], [
-            'data' => json_encode($this->payload)
+            'data' => $this->payload,
         ]);
     }
 

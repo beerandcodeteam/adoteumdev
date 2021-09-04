@@ -14,7 +14,7 @@ class Knowledge extends Model
 
     protected $fillable = ['user_id', 'data'];
 
-    protected $casts = ['data' => 'array'];
+    protected $casts = ['data' => 'json'];
 
     public function user(): BelongsTo
     {
