@@ -1,4 +1,3 @@
-
 <div x-data="startForm({
          categories: @entangle('categories'),
          payload: @entangle('payload'),
