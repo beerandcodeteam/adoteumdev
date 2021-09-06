@@ -2613,16 +2613,16 @@
         },
         {
             "name": "pestphp/pest-plugin-parallel",
-            "version": "v0.3.0",
+            "version": "v0.3.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/pestphp/pest-plugin-parallel.git",
-                "reference": "380074d6e2b5da1ad0fc61224c35eb3bfecb18d9"
+                "reference": "67c0a49754e26cbe5ecd6965631351c0ede956fa"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/pestphp/pest-plugin-parallel/zipball/380074d6e2b5da1ad0fc61224c35eb3bfecb18d9",
-                "reference": "380074d6e2b5da1ad0fc61224c35eb3bfecb18d9",
+                "url": "https://api.github.com/repos/pestphp/pest-plugin-parallel/zipball/67c0a49754e26cbe5ecd6965631351c0ede956fa",
+                "reference": "67c0a49754e26cbe5ecd6965631351c0ede956fa",
                 "shasum": ""
             },
             "require": {
@@ -2680,7 +2680,7 @@
                 "unit"
             ],
             "support": {
-                "source": "https://github.com/pestphp/pest-plugin-parallel/tree/v0.3.0"
+                "source": "https://github.com/pestphp/pest-plugin-parallel/tree/v0.3.1"
             },
             "funding": [
                 {
@@ -2712,7 +2712,7 @@
                     "type": "patreon"
                 }
             ],
-            "time": "2021-08-26T17:29:12+00:00"
+            "time": "2021-09-06T20:21:59+00:00"
         },
         {
             "name": "phar-io/manifest",
