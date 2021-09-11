@@ -8,9 +8,9 @@ use Livewire\Component;
 
 class KnowledgeScreen extends Component
 {
-    public $user;
-    public $categories;
-    public $payload;
+    public ?array $user = [];
+    public ?array $categories = [];
+    public ?array $payload = [];
 
     public function save()
     {
@@ -26,7 +26,7 @@ class KnowledgeScreen extends Component
 
     private function insertKnowledgeData(): void
     {
-        Knowledge::updateOrCreate([
+        Knowledge::query()->updateOrCreate([
             'user_id' => auth()->user()->id,
         ], [
             'data' => json_encode($this->payload)
