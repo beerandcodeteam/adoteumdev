@@ -9,9 +9,9 @@ use Livewire\Component;
 
 class InterestScreen extends Component
 {
-    public $user;
-    public $categories;
-    public $payload;
+    public array $user;
+    public ?array $categories = [];
+    public ?array $payload = [];
 
     public function save()
     {
@@ -31,7 +31,7 @@ class InterestScreen extends Component
 
     private function insertInterestsData(): void
     {
-        Interest::updateOrCreate([
+        Interest::query()->updateOrCreate([
             'user_id' => auth()->user()->id,
         ], [
             'data' => json_encode($this->payload)
