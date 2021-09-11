@@ -1,11 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Carbon;
 
 /**
@@ -13,31 +15,25 @@ use Illuminate\Support\Carbon;
  * @property string $data
  * @property Carbon $created_at
  * @property Carbon $updated_at
- *
  * @property-read User $user_id
  */
 class Interest extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['user_id', 'data'];
-
-    protected $casts = ['data' => 'json'];
+    protected $fillable = [
+        'user_id',
+        'skill_id',
+        'level',
+    ];
 
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }
 
-//    protected static function booted()
-//    {
-//        static::addGlobalScope('topSkill', function (Builder $builder) {
-//            $builder->whereJsonContains('data->Linguagens->name', ['Assembly']);
-//        });
-//    }
-
-    public function scopeTopSkill($query)
+    public function skills(): HasMany
     {
-        return $query->where('data->Linguagens', ['name' => 'Assembly']);
+        return $this->hasMany(Skill::class);
     }
 }

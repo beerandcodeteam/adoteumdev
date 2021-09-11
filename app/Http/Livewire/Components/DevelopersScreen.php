@@ -13,15 +13,9 @@ class DevelopersScreen extends Component
 
     public function mount(): void
     {
-        $this->loggedUser = User::with(['profile', 'interest', 'knowledge'])->find(Auth::user()->id);
+        $this->loggedUser = User::with(['profile', 'interests', 'knowledge'])->find(Auth::user()->id);
 
-        $this->developers = User::with(['profile', 'interest', 'knowledge'])->get()->toArray();
-
-       dd(
-           auth()->user()->id,
-           $this->loggedUser->interest->toArray(),
-           $this->loggedUser->interest->topSkill()->first(),
-       );
+        $this->developers = User::with(['profile', 'interests', 'knowledge'])->get()->toArray();
     }
 
     public function render(): \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View

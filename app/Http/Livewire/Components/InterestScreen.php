@@ -1,10 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Livewire\Components;
 
 use App\Models\Category;
 use App\Models\Interest;
-use App\Models\User;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
 use Livewire\Component;
 
 class InterestScreen extends Component
@@ -31,14 +34,17 @@ class InterestScreen extends Component
 
     private function insertInterestsData(): void
     {
-        Interest::query()->updateOrCreate([
-            'user_id' => auth()->user()->id,
-        ], [
-            'data' => $this->payload,
-        ]);
+        foreach ($this->payload as $skill) {
+            Interest::query()->updateOrCreate([
+                'user_id' => auth()->user()->id,
+                'skill_id' => $skill['skill_id'],
+            ],[
+                'level' => $skill['level'],
+            ]);
+        }
     }
 
-    public function mount(): void
+    public function mount()
     {
         $this->user = auth()->user()->load('profile')->toArray();
         $this->categories = Category::with('skills:id,category_id,name')
@@ -47,7 +53,7 @@ class InterestScreen extends Component
             ->toArray();
     }
 
-    public function render(): \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+    public function render()
     {
         return view('livewire.components.interest-screen');
     }
