@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Livewire\Components;
 
 use App\Models\Category;
@@ -26,11 +28,14 @@ class KnowledgeScreen extends Component
 
     private function insertKnowledgeData(): void
     {
-        Knowledge::query()->updateOrCreate([
-            'user_id' => auth()->user()->id,
-        ], [
-            'data' => json_encode($this->payload)
-        ]);
+        foreach ($this->payload as $skill) {
+            Knowledge::query()->updateOrCreate([
+                'user_id' => auth()->user()->id,
+                'skill_id' => $skill['skill_id'],
+            ], [
+                'level' => $skill['level'],
+            ]);
+        }
     }
 
     public function mount()

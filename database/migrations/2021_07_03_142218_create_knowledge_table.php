@@ -13,10 +13,12 @@ return new class extends Migration
         Schema::create('knowledge', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained();
-            $table->json('data');
+            $table->foreignId('skill_id')->constrained();
+            $table->integer('level');
             $table->timestamps();
         });
     }
+
 
     public function down(): void
     {

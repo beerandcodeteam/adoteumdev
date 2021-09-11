@@ -18,13 +18,11 @@ class Reset extends Component
     /** @var string */
     public $email;
 
-    /** @var string */
-    public $password;
+    public ?string $password = null;
 
-    /** @var string */
-    public $passwordConfirmation;
+    public string $passwordConfirmation;
 
-    public function mount($token)
+    public function mount(string $token): void
     {
         $this->email = request()->query('email', '');
         $this->token = $token;
@@ -68,20 +66,16 @@ class Reset extends Component
 
     /**
      * Get the broker to be used during password reset.
-     *
-     * @return \Illuminate\Contracts\Auth\PasswordBroker
      */
-    public function broker()
+    public function broker(): \Illuminate\Contracts\Auth\PasswordBroker
     {
         return Password::broker();
     }
 
     /**
      * Get the guard to be used during password reset.
-     *
-     * @return \Illuminate\Contracts\Auth\StatefulGuard
      */
-    protected function guard()
+    protected function guard(): \Illuminate\Contracts\Auth\Guard
     {
         return Auth::guard();
     }

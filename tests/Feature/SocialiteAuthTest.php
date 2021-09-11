@@ -23,8 +23,6 @@ it('checks the Github login button', function(){
 it('checks auth when automatic login is enabled', function(){
     config(['auth.auto_login' => true]);
 
-    $this->seed();
-
     $redirectGoogle = get('/auth/redirect/google');
 
     $this->followRedirects($redirectGoogle)

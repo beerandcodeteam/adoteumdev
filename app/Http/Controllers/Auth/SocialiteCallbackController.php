@@ -25,7 +25,7 @@ class SocialiteCallbackController extends Controller
                 ], [
                     'name' => $socialiteUser->name ?? $socialiteUser->nickname,
                     'password' => Hash::make(Str::random(7)),
-                ])->load('interest', 'knowledge');
+                ])->load('interests', 'knowledge');
 
                 Profile::updateOrCreate([
                     'user_id' => $user->id,
@@ -42,11 +42,11 @@ class SocialiteCallbackController extends Controller
 
             Auth::login($newUser);
 
-            if (is_null($newUser->interest)) {
+            if ($newUser->interests->count() === 0) {
                 return redirect()->route('app.interest');
             }
 
-            if (is_null($newUser->knowledge)) {
+            if ($newUser->knowledge->count() === 0) {
                 return redirect()->route('app.knowledge');
             }
 

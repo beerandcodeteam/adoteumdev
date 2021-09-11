@@ -1,0 +1,44 @@
+{
+    "Idiomas":[
+        {
+            "id":40,
+            "name":"Francês",
+            "level":1,
+            "category_id":3
+        },
+        {
+            "id":43,
+            "name":"Italiano",
+            "level":3,
+            "category_id":3
+        }
+    ],
+    "Frameworks":[
+        {
+            "id":28,
+            "name":"Meteor",
+            "level":2,
+            "category_id":2
+        },
+        {
+            "id":32,
+            "name":"Ruby on Rails",
+            "level":3,
+            "category_id":2
+        }
+    ],
+    "Linguagens":[
+        {
+            "id":1,
+            "name":"Assembly",
+            "level":1,
+            "category_id":1
+        },
+        {
+            "id":3,
+            "name":"C#",
+            "level":3,
+            "category_id":1
+        }
+    ]
+}

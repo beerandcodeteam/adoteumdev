@@ -5,10 +5,6 @@ use App\Http\Livewire\Components\InterestScreen;
 use function Pest\Laravel\assertDatabaseHas;
 use function Pest\Livewire\livewire;
 
-beforeEach(function () {
-    $this->seed();
-});
-
 it('checks if interests url is working', function () {
     $user = User::firstWhere('email', '33piter@adoteum.dev');
 
@@ -21,19 +17,24 @@ it('checks if interests list was loaded', function () {
     $user = User::firstWhere('email', '33piter@adoteum.dev');
 
     actingAs($user->load('profile'))
-        ->get(route('app.knowledge'))
+        ->get(route('app.interest'))
         ->assertSee("Assembly");
 });
 
 it('checks if interests form was stored successful', function () {
-    $payload = '{"Linguagens":[{"id":1,"category_id":1,"name":"Assembly","level":5}],"Frameworks":[{"id":18,"category_id":2,"name":"Angular.js","level":1}],"Idiomas":[{"id":42,"category_id":3,"name":"Ingl\u00eas","level":2}]}';
+    $payload = [
+        ['skill_id' => 1, 'level' => 3, 'category_id' => 1],
+        ['skill_id' => 2, 'level' => 4, 'category_id' => 1],
+        ['skill_id' => 3, 'level' => 1, 'category_id' => 1],
+        ['skill_id' => 4, 'level' => 5, 'category_id' => 1],
+    ];
 
     $user = User::firstWhere('email', '33piter@adoteum.dev');
 
     actingAs($user->load('profile'));
 
     $test = livewire(InterestScreen::class)
-        ->set('payload', json_decode($payload, true, 512, JSON_THROW_ON_ERROR))
+        ->set('payload', $payload)
         ->call('save');
 
     assertDatabaseHas('interests', [

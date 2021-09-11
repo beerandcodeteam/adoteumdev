@@ -6,7 +6,7 @@ use Illuminate\Database\Seeder;
 
 class SkillsDefaultSeeder extends Seeder
 {
-    private $skills = [
+    private array $skills = [
         'Assembly' => 1,
         'C' => 1,
         'C#' => 1,
@@ -55,7 +55,7 @@ class SkillsDefaultSeeder extends Seeder
         'Russo' => 3,
     ];
 
-    public function run()
+    public function run(): void
     {
         foreach ($this->skills as $skill => $category) {
             Skill::updateOrCreate([

@@ -215,7 +215,7 @@ class UsersDefaultSeeder extends Seeder
         ]);
     }
 
-    public function run()
+    public function run(): void
     {
         foreach ($this->users as $user) {
             $userInsert = User::updateOrCreate([

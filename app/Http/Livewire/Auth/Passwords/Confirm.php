@@ -6,10 +6,9 @@ use Livewire\Component;
 
 class Confirm extends Component
 {
-    /** @var string */
-    public $password = '';
+    public string $password = '';
 
-    public function confirm()
+    public function confirm(): \Illuminate\Http\RedirectResponse
     {
         $this->validate([
             'password' => 'required|password',
