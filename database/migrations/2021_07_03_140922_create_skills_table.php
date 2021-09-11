@@ -10,17 +10,16 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create('knowledge', function (Blueprint $table) {
+        Schema::create('skills', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained();
-            $table->foreignId('skill_id')->constrained();
-            $table->integer('level');
+            $table->foreignId('category_id')->constrained();
+            $table->string('name');
             $table->timestamps();
         });
     }
 
     public function down(): void
     {
-        Schema::dropIfExists('knowledge');
+        Schema::dropIfExists('skills');
     }
 };

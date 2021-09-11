@@ -38,7 +38,7 @@ class InterestScreen extends Component
         ]);
     }
 
-    public function mount()
+    public function mount(): void
     {
         $this->user = auth()->user()->load('profile')->toArray();
         $this->categories = Category::with('skills:id,category_id,name')
@@ -47,7 +47,7 @@ class InterestScreen extends Component
             ->toArray();
     }
 
-    public function render()
+    public function render(): \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
     {
         return view('livewire.components.interest-screen');
     }

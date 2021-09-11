@@ -11,19 +11,15 @@ use Livewire\Component;
 
 class Register extends Component
 {
-    /** @var string */
-    public $name = '';
+    public string $name = '';
 
-    /** @var string */
-    public $email = '';
+    public string $email = '';
 
-    /** @var string */
-    public $password = '';
+    public string $password = '';
 
-    /** @var string */
-    public $passwordConfirmation = '';
+    public string $passwordConfirmation = '';
 
-    public function register()
+    public function register(): \Illuminate\Http\RedirectResponse
     {
         $this->validate([
             'name' => ['required'],

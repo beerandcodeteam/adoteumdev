@@ -6,9 +6,9 @@ use Illuminate\Database\Seeder;
 
 class CategoriesDefaultSeeder extends Seeder
 {
-    private $categories = ['Linguagens','Frameworks','Idiomas'];
+    private array $categories = ['Linguagens','Frameworks','Idiomas'];
 
-    public function run()
+    public function run(): void
     {
         foreach ($this->categories as $category) {
             Category::updateOrCreate([

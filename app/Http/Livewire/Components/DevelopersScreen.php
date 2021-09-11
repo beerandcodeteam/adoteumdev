@@ -11,7 +11,7 @@ class DevelopersScreen extends Component
     public User $loggedUser;
     public array $developers;
 
-    public function mount()
+    public function mount(): void
     {
         $this->loggedUser = User::with(['profile', 'interest', 'knowledge'])->find(Auth::user()->id);
 
@@ -24,7 +24,7 @@ class DevelopersScreen extends Component
        );
     }
 
-    public function render()
+    public function render(): \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
     {
         return view('livewire.components.developers-screen');
     }
