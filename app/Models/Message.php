@@ -5,7 +5,17 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Support\Carbon;
 
+/**
+ * @property int $id
+ * @property string $content
+ * @property Carbon $created_at
+ * @property Carbon $updated_at
+ *
+ * @property-read User $from_user_id
+ * @property-read User $to_user_id
+ */
 class Message extends Model
 {
     use HasFactory;
