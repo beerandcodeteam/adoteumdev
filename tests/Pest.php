@@ -13,9 +13,12 @@
 
 use Illuminate\Contracts\Auth\Authenticatable;
 
-uses(Tests\TestCase::class)->in('Feature');
-
-//uses(Illuminate\Foundation\Testing\RefreshDatabase::class, Tests\TestCase::class)->in('Feature');
+uses(
+    Illuminate\Foundation\Testing\RefreshDatabase::class,
+    Tests\TestCase::class,
+)
+->beforeEach(fn () => $this->seed())
+->in('Feature');
 
 /*
 |--------------------------------------------------------------------------
