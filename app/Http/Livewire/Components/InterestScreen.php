@@ -19,6 +19,7 @@ class InterestScreen extends Component
     public function save()
     {
         try {
+            dd($this->payload);
             $this->insertInterestsData();
 
             if (userIsDeveloper()) {

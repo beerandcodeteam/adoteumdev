@@ -55,6 +55,9 @@ if [ "$1" == "config" ]; then
 elif [ "$1" == "init" ]; then
 
     ./vendor/bin/sail up --build --force-recreate -d
+elif [ "$1" == "test" ]; then
+
+    ./vendor/bin/sail art test -p
 
 else
     ./vendor/bin/sail "$@"
