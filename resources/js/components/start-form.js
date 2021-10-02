@@ -10,7 +10,7 @@ document.addEventListener("alpine:init", () => {
 
                 this.payload.push({
                     category_id: skill.category_id,
-                    skill_id: skill.id,
+                    id: skill.id,
                     level: 0,
                     name: skill.name
                 })

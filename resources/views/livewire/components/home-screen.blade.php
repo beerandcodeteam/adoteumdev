@@ -16,7 +16,7 @@
             </p>
 
             <button wire:click="loginWithGoogle"
-                class="flex flex-row space-x-2 justify-center items-center bg-white p-4 text-grey-100 w-full text-sm rounded-full mt-8 font-bold transform duration-150 active:scale-95"
+                class="flex flex-row space-x-2 justify-center items-center bg-white p-4 text-gray-100 w-full text-sm rounded-full mt-8 font-bold transform duration-150 active:scale-95"
             >
                 <x-icon-google class="h-4 w-4 fill-current" />
                 <span>Entrar como Recrutador</span>

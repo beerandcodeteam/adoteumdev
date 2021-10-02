@@ -19,7 +19,6 @@ class InterestScreen extends Component
     public function save()
     {
         try {
-            dd($this->payload);
             $this->insertInterestsData();
 
             if (userIsDeveloper()) {
@@ -38,7 +37,7 @@ class InterestScreen extends Component
         foreach ($this->payload as $skill) {
             Interest::query()->updateOrCreate([
                 'user_id' => auth()->user()->id,
-                'skill_id' => $skill['skill_id'],
+                'skill_id' => $skill['id'],
             ],[
                 'level' => $skill['level'],
             ]);

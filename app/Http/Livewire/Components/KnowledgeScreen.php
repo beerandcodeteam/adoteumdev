@@ -31,7 +31,7 @@ class KnowledgeScreen extends Component
         foreach ($this->payload as $skill) {
             Knowledge::query()->updateOrCreate([
                 'user_id' => auth()->user()->id,
-                'skill_id' => $skill['skill_id'],
+                'skill_id' => $skill['id'],
             ], [
                 'level' => $skill['level'],
             ]);
