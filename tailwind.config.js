@@ -31,6 +31,12 @@ module.exports = {
                     100: '#35abf5',
                     50:  '#22b7f9',
                 }
+            },
+            maxHeight: {
+                swipe: 'calc(100vh - 200px)'
+            },
+            height: {
+                swipe: 'calc(100vh - 200px)'
             }
         },
     },

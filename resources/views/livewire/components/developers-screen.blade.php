@@ -20,7 +20,7 @@
     </div>
 
     <div
-        class="flex flex-1 flex-row items-start justify-center w-full relative mt-4"
+        class="flex flex-1 w-full flex-row items-start justify-center relative mt-4"
         x-ref="cardbox"
     >
 
@@ -29,14 +29,14 @@
         >
             <div
                 x-ref="swipecard"
-                class="flex w-full absolute transition transform duration-500 ease-in-out"
+                class="flex w-full absolute transition transform duration-500 ease-in-out select-none"
                 x-on:pointerdown="mouseclick"
                 x-on:pointermove="movingcard"
                 x-on:pointerup="releasecard"
                 x-on:pointercancel="releasecard"
                 x-on:pointerleave="releasecard"
             >
-                <div class="relative w-full cursor-pointer">
+                <div class="relative w-full cursor-pointer overflow-hidden h-swipe max-h-swipe">
 
                     <div
                         class="flex flex-row w-full items-center absolute top-0 left-0 p-4"
@@ -59,7 +59,7 @@
                         </div>
                     </div>
 
-                    <img class="w-full rounded-md pointer-events-none" src="https://placeimg.com/600/600/people" />
+                    <img class="w-full h-swipe object-cover object-center rounded-md pointer-events-none" src="https://placeimg.com/600/600/people" />
 
                     <div
                         class="text-md rounded-md text-white absolute bottom-0 left-0 flex flex-col w-full p-4 space-y-2 bg-gradient-to-t from-black via-black-50 "
