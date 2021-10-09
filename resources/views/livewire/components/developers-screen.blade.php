@@ -1,4 +1,7 @@
-<div class="flex flex-col min-h-screen w-full justify-between items-center p-7 bg-gray-10">
+<div
+    class="flex flex-col min-h-screen w-full justify-between items-center p-7 bg-gray-10 overflow-hidden"
+    x-data="swipeCard()"
+>
     <div class="flex flex-row items-center justify-between w-full">
         <div class="cursor-pointer transform duration-150 active:scale-95">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8  text-gray-25" viewBox="0 0 20 20" fill="currentColor">
@@ -16,11 +19,88 @@
         </div>
     </div>
 
-    <div class="flex flex-1 flex-row items-center justify-center w-full">
+    <div
+        class="flex flex-1 flex-row items-start justify-center w-full relative mt-4"
+        x-ref="cardbox"
+    >
 
-        <div class="">
+        <template
+            x-if="showelement"
+        >
+            <div
+                x-ref="swipecard"
+                class="flex w-full absolute transition transform duration-500 ease-in-out"
+                x-on:pointerdown="mouseclick"
+                x-on:pointermove="movingcard"
+                x-on:pointerup="releasecard"
+                x-on:pointercancel="releasecard"
+                x-on:pointerleave="releasecard"
+            >
+                <div class="relative w-full cursor-pointer">
 
-        </div>
+                    <div
+                        class="flex flex-row w-full items-center absolute top-0 left-0 p-4"
+                        x-ref="actionbox"
+                    >
+                        <div
+                            x-show="like"
+                            x-ref="like"
+                            class="bg-green-500 py-1 px-6 text-white font-bold rounded-full"
+                        >
+                            LIKE
+                        </div>
+
+                        <div
+                            x-show="dislike"
+                            x-ref="dislike"
+                            class="bg-primary-100 py-1 px-6 text-white font-bold rounded-full"
+                        >
+                            NOPE
+                        </div>
+                    </div>
+
+                    <img class="w-full rounded-md pointer-events-none" src="https://placeimg.com/600/600/people" />
+
+                    <div
+                        class="text-md rounded-md text-white absolute bottom-0 left-0 flex flex-col w-full p-4 space-y-2 bg-gradient-to-t from-black via-black-50 "
+                    >
+                        <div class="flex flex-row items-center">
+                            <span class="font-bold">Lucas Souza</span>
+                            <span>,</span>
+                            <span class="ml-1"> Brasil</span>
+                        </div>
+                        <span>PHP Backend Developer</span>
+                        <span>3 interesses em comum [PHP, Vue, Js]</span>
+                        <div class="flex flex-row items-center w-full space-x-6 ">
+
+                            <div class="flex flex-row items-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
+                                </svg>
+                                <span class="text-xs font-bold ml-1">55</span>
+                            </div>
+
+                            <div class="flex flex-row items-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 4v12l-4-2-4 2V4M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                                </svg>
+                                <span class="text-xs font-bold ml-1">235</span>
+                            </div>
+
+                            <div class="flex flex-row items-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z" />
+                                </svg>
+                                <span class="text-xs font-bold ml-1">55</span>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </template>
 
     </div>
 
