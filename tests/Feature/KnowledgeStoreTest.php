@@ -31,15 +31,14 @@ it('stores knowledge form', function () {
 
     $user = User::firstWhere('email', '33piter@adoteum.dev');
 
+    $this->assertDatabaseMissing('knowledge', ['user_id' => $user->id]);
+
     actingAs($user->load('profile'));
 
-    $test = livewire(KnowledgeScreen::class)
+    livewire(KnowledgeScreen::class)
         ->set('payload', $payload)
-        ->call('save');
+        ->call('save')
+        ->assertRedirect(route('app.developers'));
 
-    assertDatabaseHas('knowledge', [
-        'user_id' => $user->id,
-    ]);
-
-    $test->assertRedirect(route('app.developers'));
+    $this->assertDatabaseHas('knowledge', ['user_id' => $user->id]);
 });
