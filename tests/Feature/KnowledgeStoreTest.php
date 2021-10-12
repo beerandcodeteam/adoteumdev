@@ -21,7 +21,7 @@ it('checks if knowledge list was loaded', function () {
         ->assertSee("Assembly");
 });
 
-it('checks if knowledge form was stored successful', function () {
+it('stores knowledge form', function () {
     $payload = [
         ['id' => 1, 'level' => 3, 'category_id' => 1],
         ['id' => 2, 'level' => 4, 'category_id' => 1],
