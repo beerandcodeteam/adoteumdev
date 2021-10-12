@@ -13,7 +13,7 @@ it('checks if knowledge url is working', function () {
         ->assertOk();
 });
 
-it('checks if knoledge list was loaded', function () {
+it('checks if knowledge list was loaded', function () {
     $user = User::firstWhere('email', '33piter@adoteum.dev');
 
     actingAs($user->load('profile'))
