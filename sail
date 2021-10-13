@@ -28,6 +28,21 @@ fi
 export APP_SERVICE=${APP_SERVICE:-"laravel.test"}
 export WWWUSER=${WWWUSER:-$UID}
 export WWWGROUP=${WWWGROUP:-$(id -g)}
+
+# Determine if Sail is currently up...
+PSRESULT="$(docker-compose ps -q)"
+if docker-compose ps | grep $APP_SERVICE | grep 'Exit'; then
+    echo -e "Shutting down old Sail processes..." >&2
+
+    docker-compose down > /dev/null 2>&1
+
+    EXEC="no"
+elif [ -n "$PSRESULT" ]; then
+    EXEC="yes"
+else
+    EXEC="no"
+fi
+
 # Source the ".env" file so Laravel's environment variables are available...
 if [ -f ./.env ]; then
     source ./.env
