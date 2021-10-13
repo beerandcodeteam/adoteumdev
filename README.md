@@ -32,6 +32,7 @@
     </p>
     <p>
         <a href="#about">About</a> |
+        <a href="#get-started">Get Started</a> |
         <a href="#contributing">Contributing</a> |
         <a href="#credits">Credits</a> |
         <a href="#license">License</a>
@@ -41,6 +42,8 @@
 ## About
 
 `AdoteUm.Dev` has the proposal to connect people who are looking for developers for their projects. AdoteUmDev is a web application, developed in PHP language and the Laravel Framework.
+
+This is a non-profit project. All prototypes, software code, design and illustrations are created for educational purposes only.
 
 ### Tecnologies
 
@@ -67,6 +70,14 @@ AdoteUm.Dev mobile version will be created using Flutter when we reach the goal 
 
 - SUBSCRIBE ([Youtube](https://www.youtube.com/channel/UCtz8hxpbicBe8REEdEtAYWA))
 - SHARE WITH FRIENDS ([Twitter](https://twitter.com/beerandcodeyt) and [Instagram](https://www.instagram.com/beerandcode_oficial))
+
+<br />
+
+## Get Started
+
+Please refer to [Development Setup](./.github/CONTRIBUTING.md#5-development-setup) section in our Contributing Guide.
+
+All requirements and steps to run AdoteUm.Dev are listed there.
 
 <br />
 
