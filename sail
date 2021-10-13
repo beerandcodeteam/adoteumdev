@@ -25,6 +25,9 @@ if ! docker info > /dev/null 2>&1; then
     exit 1
 fi
 
+export APP_SERVICE=${APP_SERVICE:-"laravel.test"}
+export WWWUSER=${WWWUSER:-$UID}
+export WWWGROUP=${WWWGROUP:-$(id -g)}
 # Source the ".env" file so Laravel's environment variables are available...
 if [ -f ./.env ]; then
     source ./.env
