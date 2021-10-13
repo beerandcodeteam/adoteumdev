@@ -74,10 +74,17 @@ elif [ "$1" == "init" ]; then
 
     ./vendor/bin/sail up --build --force-recreate -d
 elif [ "$1" == "test" ]; then
+    shift 1
 
-    ./vendor/bin/sail art test -p
+    if [ "$EXEC" == "yes" ]; then
+        docker-compose exec \
+            -u sail \
+            "$APP_SERVICE" \
+            php artisan test -p "$@"
+    else
+        echo "Sail is not running."
+    fi
 
 else
     ./vendor/bin/sail "$@"
 fi
-
