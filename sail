@@ -25,6 +25,24 @@ if ! docker info > /dev/null 2>&1; then
     exit 1
 fi
 
+export APP_SERVICE=${APP_SERVICE:-"laravel.test"}
+export WWWUSER=${WWWUSER:-$UID}
+export WWWGROUP=${WWWGROUP:-$(id -g)}
+
+# Determine if Sail is currently up...
+PSRESULT="$(docker-compose ps -q)"
+if docker-compose ps | grep $APP_SERVICE | grep 'Exit'; then
+    echo -e "Shutting down old Sail processes..." >&2
+
+    docker-compose down > /dev/null 2>&1
+
+    EXEC="no"
+elif [ -n "$PSRESULT" ]; then
+    EXEC="yes"
+else
+    EXEC="no"
+fi
+
 # Source the ".env" file so Laravel's environment variables are available...
 if [ -f ./.env ]; then
     source ./.env
@@ -56,7 +74,16 @@ elif [ "$1" == "init" ]; then
     ./vendor/bin/sail up --build --force-recreate -d
     
 elif [ "$1" == "test" ]; then
-    ./vendor/bin/sail art test -p "${*:2}"
+    shift 1
+
+    if [ "$EXEC" == "yes" ]; then
+        docker-compose exec \
+            -u sail \
+            "$APP_SERVICE" \
+            php artisan test -p "$@"
+    else
+        echo "Sail is not running."
+    fi
 
 else
     ./vendor/bin/sail "$@"
