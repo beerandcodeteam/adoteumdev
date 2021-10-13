@@ -71,8 +71,8 @@ if [ "$1" == "config" ]; then
     fi
 
 elif [ "$1" == "init" ]; then
-
     ./vendor/bin/sail up --build --force-recreate -d
+    
 elif [ "$1" == "test" ]; then
     shift 1
 
