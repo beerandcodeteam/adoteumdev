@@ -25,8 +25,17 @@ generateAppKey(){
     fi
 }
 
+buildAppAssets(){
+    echo -e "${LABEL_ADOTE}building App Assets... 🎒"
+
+    docker-compose exec \
+    -u sail \
+    "$APP_SERVICE" \
+    npm run dev
+}
+
 checkDependencies() {
-     if [ ! -d ./vendor ] || [ ! -f ./vendor/bin/sail ]; then
+     if [ ! -d ./vendor ] || [ ! -f ./vendor/bin/sail ] || [ ! -d ./node_modules ] || [ -z "$(ls -A ./node_modules)" ]; then
         AdoteBanner     
         read -p "$(echo -e "${LABEL_ERROR}It seems your app is missing package dependencies. ${GREEN}Let's download them now${NC} [y/N]? ")"  ANSWER
 
@@ -57,7 +66,7 @@ configureSail() {
         -v "$(pwd)":/usr/src/app \
         -w /usr/src/app \
         node:16-alpine \
-        && npm install && npm run dev
+        npm install
 
     if [ ! -f $ENVFILE ]; then
         cp .env.example .env
@@ -65,7 +74,7 @@ configureSail() {
 
     if [ -d ./vendor ] && [ -f ./vendor/bin/sail ]; then
         echo -e "${LABEL_OK}configuration done!"
-        echo -e "${LABEL_ADOTE}You can start the app now. Run: ${GREEN}./sail init${NC}" command.
+        echo -e "${LABEL_ADOTE}You can start the app now. Run: ${GREEN}./sail init${NC} command."
         exit 0
     else
         echo -e "${LABEL_ERROR}Unkown error happend."
@@ -165,7 +174,10 @@ if [ "$1" == "config" ]; then
     exit 0;
 fi
 
-#All comands bellow should only run if the dependencies are installed.
+#############################################################
+# Commands below require dependecies  to be installed      #
+#############################################################
+
 checkDependencies
 
 if [ "$1" == "init" ]; then
@@ -183,15 +195,20 @@ if [ "$1" == "init" ]; then
     fi
     
     generateAppKey
+    buildAppAssets
 
     echo -e "${LABEL_OK}Everything is up and running!"
     echo -e "\n⛵ Some useful commands are:\n"
     echo -e "${GREEN}./sail art <cmd>${NC} runs a command with Laravel Artisan."
+    echo -e "${GREEN}./sail build${NC}     build assets (npm run dev)."
     echo -e "${GREEN}./sail test ${NC}     runs tests with Pest in parallel mode."
     echo -e "${GREEN}./sail tinker ${NC}   opens a Laravel Tinker console."
     echo -e "${GREEN}./sail shell ${NC}    opens a shell inside your app container."
     echo -e "${GREEN}./sail stop ${NC}     stops your app container."
     echo -e "\n${LABEL_ADOTE} Enjoy and have fun! ⭐ ${YELLOW}Star${NC} our repository: ${YELLOW}https://github.com/beerandcodeteam/adoteumdev${NC}\n"
+
+elif [ "$1" == "build" ]; then
+    buildAppAssets
 
 elif [ "$1" == "test" ]; then
     shift 1
