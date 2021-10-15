@@ -8,27 +8,27 @@ NC='\033[0m'
 WHITE='\033[1;37m'
 GREEN='\033[0;32m'
 YELLOW='\033[1;33m'
-LABEL_ERROR="\033[048;5;9m ERROR ${NC} "
-LABEL_OK="\033[048;5;64m  OK   ${NC} "
-LABEL_ADOTE="\033[048;5;167m \033[1m→ AdoteUm.Dev ${NC} "
+LABEL_ERROR="\n\033[048;5;9m ERROR ${NC} "
+LABEL_OK="\n\033[048;5;64m  OK   ${NC} "
+LABEL_ADOTE="\n\033[048;5;167m \033[1m→ AdoteUm.Dev ${NC} "
 
 checkDependencies() {
      if [ ! -d ./vendor ] || [ ! -f ./vendor/bin/sail ]; then
         AdoteBanner     
-        read -p "$(echo -e "${LABEL_ERROR}It seems your app is not configured. ${GREEN}Start self-config it now? ${NC}(y/N)")"  ANSWER
+        read -p "$(echo -e "${LABEL_ERROR}It seems your app is missing package dependencies. ${GREEN}Let's download now?${NC} (y/N)")"  ANSWER
 
 
         if [[ $ANSWER == "y" || $ANSWER == "Y" || $ANSWER == "yes" || $ANSWER == "YES" ]] ; then
             configureSail
         else
-            echo -e "Aborting! You must run ${GREEN}./sail config ${NC} to configure your app."
+            echo -e "Aborting! You must run ${GREEN}./sail config ${NC} to configure your app and download dependencies."
         fi
         exit 1
      fi
 }
 
 configureSail() {
-    echo -e "${LABEL_ADOTE}is starting self-configuring."
+    echo -e "${LABEL_ADOTE}is starting to download packages and self-configure."
 
     ENVFILE='./.env'
 
@@ -52,7 +52,7 @@ configureSail() {
 
     if [ -d ./vendor ] && [ -f ./vendor/bin/sail ]; then
         echo -e "${LABEL_OK}configuration done!"
-        echo -e "${LABEL_ADOTE}You can start the app now. Run: ${GREEN}./sail init ${NC}".
+        echo -e "${LABEL_ADOTE}You can start the app now. Run: ${GREEN}./sail init${NC}" command.
 
     else
         echo -e "${LABEL_ERROR}Unkown error happend."
@@ -163,9 +163,8 @@ if [ "$1" == "init" ]; then
     echo -e "${LABEL_ADOTE}is starting..."
 
     ./vendor/bin/sail up --build --force-recreate -d
-    echo -e "\n"
-    echo -e "${LABEL_OK} Everything should be up and running!\n"
-    echo -e "⛵ Some useful commands are:\n"
+    echo -e "${LABEL_OK} Everything should be up and running!"
+    echo -e "\n⛵ Some useful commands are:\n"
     echo -e "${GREEN}./sail art ${NC}runs Laravel Artisan."
     echo -e "${GREEN}./sail test ${NC}runs tests with Pest in parallel mode."
     echo -e "${GREEN}./sail tinker ${NC}opens a Laravel thinker console."
