@@ -167,7 +167,7 @@ if [ "$1" == "init" ]; then
     ALL_UP="$(docker-compose ps | grep 'Exit';)"
 
     if [ -n "$ALL_UP" ]; then
-        echo -e "${LABEL_ERROR}The application could not be started. Check the errors above."
+        echo -e "${LABEL_ERROR}Some services could not be started. Check the output above."
         exit 1;
     fi
 
