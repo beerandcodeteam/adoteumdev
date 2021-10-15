@@ -14,20 +14,21 @@ LABEL_ADOTE="\033[048;5;167m \033[1m→ AdoteUm.Dev ${NC} "
 
 checkDependencies() {
      if [ ! -d ./vendor ] || [ ! -f ./vendor/bin/sail ]; then
+        AdoteBanner     
+        read -p "$(echo -e "${LABEL_ERROR}It seems your app is not configured. ${GREEN}Start self-config it now? ${NC}(y/N)")"  ANSWER
 
-        echo -e "${LABEL_ERROR}It seems your project is not configured. Run ${GREEN}./sail configure${NC} now? (y/N)"
-        read -t 20  ANSWER
 
         if [[ $ANSWER == "y" || $ANSWER == "Y" || $ANSWER == "yes" || $ANSWER == "YES" ]] ; then
             configureSail
+        else
+            echo -e "Aborting! You must run ${GREEN}./sail config ${NC} to configure your app."
         fi
         exit 1
      fi
 }
 
 configureSail() {
-
-    echo -e "${LABEL_ADOTE}is now being configured..."
+    echo -e "${LABEL_ADOTE}is starting self-configuring."
 
     ENVFILE='./.env'
 
@@ -51,8 +52,58 @@ configureSail() {
 
     if [ -d ./vendor ] && [ -f ./vendor/bin/sail ]; then
         echo -e "${LABEL_OK}configuration done!"
+        echo -e "${LABEL_ADOTE}You can start the app now. Run: ${GREEN}./sail init ${NC}".
+
+    else
+        echo -e "${LABEL_ERROR}Unkown error happend."
+
     fi
 
+}
+
+
+function AdoteBanner() {
+    echo -e "\033[038;5;167m                                         *((/*,.                                "
+    echo -e "\033[038;5;167m                                         ,/(/////*,                             "
+    echo -e "\033[038;5;167m                                         ,/(/////////,.                         "
+    echo -e "\033[038;5;167m                                         ,/(//////////(/,.                      "
+    echo -e "\033[038;5;167m                                         *///////////////(/,                    "
+    echo -e "\033[038;5;167m                                        .///////////////////(,.                 "
+    echo -e "\033[038;5;167m                                        ,/(///////////////////(*                "
+    echo -e "\033[038;5;167m                                       .////////////////////////(*.             "
+    echo -e "\033[038;5;167m                .*,                   ,/(////////////////////////(/,            "
+    echo -e "\033[038;5;167m             ,*/((*.                 ,/(/////////////////////////////.          "
+    echo -e "\033[038;5;167m          .*(////(/,               .////////////////////////////////(/,         "
+    echo -e "\033[038;5;167m        ./(////////*             ,/(///////////////////////////////////*        "
+    echo -e "\033[038;5;167m      ./(///////////*         ,/(///////////////////////////////////////*       "
+    echo -e "\033[038;5;167m     *//////////////(*.  .*/(///////////////////////////////////////////(,      "
+    echo -e "\033[038;5;167m   .//////////////////////////////////////////////////////////////////////,     "
+    echo -e "\033[038;5;167m  .*(////////////////////////////////////////////////////////////////////(*.    "
+    echo -e "\033[038;5;167m .*/////////////////////////////////////////////////**/////////////////////,    "
+    echo -e "\033[038;5;167m *//////////////////*  ,///////**,,,,.,,,,,**//////,  ,////////////////////*    "
+    echo -e "\033[038;5;167m.///////////////////,                                 ,/////////////////////.   "
+    echo -e "\033[038;5;167m,////////////////////.                               .*/////////////////////.   "
+    echo -e "\033[038;5;167m,//////////////////*.                                 .*(///////////////////.   "
+    echo -e "\033[038;5;167m,/////////////////*.                                    ,///////////////////.   "
+    echo -e "\033[038;5;167m,////////////////*.                                     .*/////////////////*    "
+    echo -e "\033[038;5;167m.*///////////////*.                                      */////////////////,    "
+    echo -e "\033[038;5;167m ,////////////////,                                     ./////////////////*.    "
+    echo -e "\033[038;5;167m .*///////////////*.                                    *////////////////*.     "
+    echo -e "\033[038;5;167m  .*(//////////////*.                                 .*(////////////////.      "
+    echo -e "\033[038;5;167m    *////////////////*.                              ,/////////////////*        "
+    echo -e "\033[038;5;167m     ,//////*.  .,*/////*,.                     .,*///////////////////,         "
+    echo -e "\033[038;5;167m      .,/////**,,.  .*////////*.           .*///////////////////////,.          "
+    echo -e "\033[038;5;167m         ,////////*.  .*/////*.             .*////////////////////,.            "
+    echo -e "\033[038;5;167m           ,///////*.                        */////////////////*.               "
+    echo -e "\033[038;5;167m              ,*//////*,......               *//////////////*.                  "
+    echo -e "\033[038;5;167m                 .,/////////(*.              *//////////*,                      "
+    echo -e "\033[038;5;167m                      .,*//((*.              */(//*,.                           "
+    echo -e "\033[0m            ___       __      __       __  __            ____           "
+    echo -e "\033[0m           /   | ____/ /___  / /____  / / / /___ ___    / __ \___ _   __"
+    echo -e "\033[0m          / /| |/ __  / __ \/ __/ _ \/ / / / __  __ \  / / / / _ \ | / /"
+    echo -e "\033[0m         / ___ / /_/ / /_/ / /_/  __/ /_/ / / / / / / / /_/ /  __/ |/ / "
+    echo -e "\033[0m        /_/  |_\__,_/\____/\__/\___/\____/_/ /_/ /_(_)_____/\___/|___/  "
+    echo -e "\033[0m                                                    by Beer And Code\n"
 }
 ########################################################
 
@@ -99,15 +150,21 @@ if [ -f ./.env ]; then
 fi
 
 if [ "$1" == "config" ]; then
+    AdoteBanner
     configureSail
+    exit 0;
+fi
 
-elif [ "$1" == "init" ]; then
+#All comands bellow should only run if the dependencies are installed.
+checkDependencies
+
+if [ "$1" == "init" ]; then
+    AdoteBanner
     echo -e "${LABEL_ADOTE}is starting..."
     ./vendor/bin/sail up --build --force-recreate -d
     
 elif [ "$1" == "test" ]; then
     shift 1
-    checkDependencies
     docker-compose exec \
     -u sail \
     "$APP_SERVICE" \
