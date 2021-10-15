@@ -163,7 +163,15 @@ if [ "$1" == "init" ]; then
     echo -e "${LABEL_ADOTE}is starting..."
 
     ./vendor/bin/sail up --build --force-recreate -d
-    echo -e "${LABEL_OK} Everything should be up and running!"
+
+    ALL_UP="$(docker-compose ps | grep 'Exit';)"
+
+    if [ -n "$ALL_UP" ]; then
+        echo -e "${LABEL_ERROR}The application could not be started. Check the errors above."
+        exit 1;
+    fi
+
+    echo -e "${LABEL_OK} Everything is up and running!"
     echo -e "\n⛵ Some useful commands are:\n"
     echo -e "${GREEN}./sail art ${NC}runs Laravel Artisan."
     echo -e "${GREEN}./sail test ${NC}runs tests with Pest in parallel mode."
