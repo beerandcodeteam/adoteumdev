@@ -15,13 +15,13 @@ LABEL_ADOTE="\n\033[048;5;167m \033[1m→ AdoteUm.Dev ${NC} "
 checkDependencies() {
      if [ ! -d ./vendor ] || [ ! -f ./vendor/bin/sail ]; then
         AdoteBanner     
-        read -p "$(echo -e "${LABEL_ERROR}It seems your app is missing package dependencies. ${GREEN}Let's download now?${NC} (y/N)")"  ANSWER
-
+        read -p "$(echo -e "${LABEL_ERROR}It seems your app is missing package dependencies. ${GREEN}Let's download them now?${NC} (y/N)")"  ANSWER
 
         if [[ $ANSWER == "y" || $ANSWER == "Y" || $ANSWER == "yes" || $ANSWER == "YES" ]] ; then
             configureSail
         else
             echo -e "Aborting! You must run ${GREEN}./sail config ${NC} to configure your app and download dependencies."
+            exit
         fi
         exit 1
      fi
