@@ -103,7 +103,7 @@ function AdoteBanner() {
     echo -e "\033[0m          / /| |/ __  / __ \/ __/ _ \/ / / / __  __ \  / / / / _ \ | / /"
     echo -e "\033[0m         / ___ / /_/ / /_/ / /_/  __/ /_/ / / / / / / / /_/ /  __/ |/ / "
     echo -e "\033[0m        /_/  |_\__,_/\____/\__/\___/\____/_/ /_/ /_(_)_____/\___/|___/  "
-    echo -e "\033[0m                                                    by Beer And Code\n"
+    echo -e "\033[0m                                                    by \033[31mBeer And Code\033[0m\n"
 }
 ########################################################
 
@@ -161,8 +161,18 @@ checkDependencies
 if [ "$1" == "init" ]; then
     AdoteBanner
     echo -e "${LABEL_ADOTE}is starting..."
+
     ./vendor/bin/sail up --build --force-recreate -d
-    
+    echo -e "\n"
+    echo -e "${LABEL_OK} Everything should be up and running!\n"
+    echo -e "⛵ Some useful commands are:\n"
+    echo -e "${GREEN}./sail art ${NC}runs Laravel Artisan"
+    echo -e "${GREEN}./sail test ${NC}runs tests with Pest in parallel mode"
+    echo -e "${GREEN}./sail tinker ${NC}opens a Laravel thinker console."
+    echo -e "${GREEN}./sail shell ${NC}opens a shell in your app container."
+    echo -e "${GREEN}./sail stop ${NC} stops your app container."
+    echo -e "\n${LABEL_ADOTE} HAVE FUN!\n"
+
 elif [ "$1" == "test" ]; then
     shift 1
     docker-compose exec \
