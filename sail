@@ -57,7 +57,7 @@ configureSail() {
         -v "$(pwd)":/usr/src/app \
         -w /usr/src/app \
         node:16-alpine \
-        npm install
+        && npm install && npm run dev
 
     if [ ! -f $ENVFILE ]; then
         cp .env.example .env
