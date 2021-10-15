@@ -56,7 +56,7 @@ configureSail() {
 
     else
         echo -e "${LABEL_ERROR}Unkown error happend."
-
+        exit 1
     fi
 
 }
