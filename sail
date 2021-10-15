@@ -12,6 +12,19 @@ LABEL_ERROR="\n\033[048;5;9m ERROR ${NC} "
 LABEL_OK="\n\033[048;5;64m  OK   ${NC} "
 LABEL_ADOTE="\n\033[048;5;167m \033[1m→ AdoteUm.Dev ${NC} "
 
+generateAppKey(){
+    HAS_KEY=$(grep APP_KEY=base64 .env)
+        
+    if [  -f ./.env ] && [ -z "$HAS_KEY"  ]; then
+        echo -e "${LABEL_ADOTE}generating App Key... 🗝️"
+
+        docker-compose exec \
+        -u sail \
+        "$APP_SERVICE" \
+        php artisan key:generate --ansi
+    fi
+}
+
 checkDependencies() {
      if [ ! -d ./vendor ] || [ ! -f ./vendor/bin/sail ]; then
         AdoteBanner     
@@ -20,7 +33,7 @@ checkDependencies() {
         if [[ $ANSWER == "y" || $ANSWER == "Y" || $ANSWER == "yes" || $ANSWER == "YES" ]] ; then
             configureSail
         else
-            echo -e "Aborting! You must run ${GREEN}./sail config ${NC} to configure your app and download dependencies."
+            echo -e "Aborting! Run ${GREEN}./sail config${NC} to configure your app and download dependencies."
             exit
         fi
         exit 1
@@ -53,14 +66,12 @@ configureSail() {
     if [ -d ./vendor ] && [ -f ./vendor/bin/sail ]; then
         echo -e "${LABEL_OK}configuration done!"
         echo -e "${LABEL_ADOTE}You can start the app now. Run: ${GREEN}./sail init${NC}" command.
-
+        exit 0
     else
         echo -e "${LABEL_ERROR}Unkown error happend."
         exit 1
     fi
-
 }
-
 
 function AdoteBanner() {
     echo -e "\033[038;5;167m                                         *((/*,.                                "
@@ -116,7 +127,6 @@ esac
 
 if [ "$MACHINE" == "UNKNOWN" ]; then
     echo -e "${LABEL_ERROR}Unsupported operating system [$(uname -s)]. Laravel Sail supports macOS, Linux, and Windows (WSL2)." >&2
-
     exit 1
 fi
 
@@ -167,18 +177,21 @@ if [ "$1" == "init" ]; then
     ALL_UP="$(docker-compose ps | grep 'Exit';)"
 
     if [ -n "$ALL_UP" ]; then
+        docker-compose ps
         echo -e "${LABEL_ERROR}Some services could not be started. Check the output above."
         exit 1;
     fi
+    
+    generateAppKey
 
-    echo -e "${LABEL_OK} Everything is up and running!"
+    echo -e "${LABEL_OK}Everything is up and running!"
     echo -e "\n⛵ Some useful commands are:\n"
-    echo -e "${GREEN}./sail art ${NC}runs Laravel Artisan."
-    echo -e "${GREEN}./sail test ${NC}runs tests with Pest in parallel mode."
-    echo -e "${GREEN}./sail tinker ${NC}opens a Laravel thinker console."
-    echo -e "${GREEN}./sail shell ${NC}opens a shell in your app container."
-    echo -e "${GREEN}./sail stop ${NC} stops your app container."
-    echo -e "\n${LABEL_ADOTE} HAVE FUN!\n"
+    echo -e "${GREEN}./sail art ${NC}     runs Laravel Artisan."
+    echo -e "${GREEN}./sail test ${NC}    runs tests with Pest in parallel mode."
+    echo -e "${GREEN}./sail tinker ${NC}  opens a Laravel thinker console."
+    echo -e "${GREEN}./sail shell ${NC}   opens a shell in your app container."
+    echo -e "${GREEN}./sail stop ${NC}    stops your app container."
+    echo -e "\n${LABEL_ADOTE} Enjoy and have fun! ⭐ ${YELLOW}Star${NC} our repository: ${YELLOW}https://github.com/beerandcodeteam/adoteumdev${NC}\n"
 
 elif [ "$1" == "test" ]; then
     shift 1
