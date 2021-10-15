@@ -186,11 +186,11 @@ if [ "$1" == "init" ]; then
 
     echo -e "${LABEL_OK}Everything is up and running!"
     echo -e "\n⛵ Some useful commands are:\n"
-    echo -e "${GREEN}./sail art ${NC}     runs Laravel Artisan."
-    echo -e "${GREEN}./sail test ${NC}    runs tests with Pest in parallel mode."
-    echo -e "${GREEN}./sail tinker ${NC}  opens a Laravel thinker console."
-    echo -e "${GREEN}./sail shell ${NC}   opens a shell in your app container."
-    echo -e "${GREEN}./sail stop ${NC}    stops your app container."
+    echo -e "${GREEN}./sail art <cmd>${NC} runs a command with Laravel Artisan."
+    echo -e "${GREEN}./sail test ${NC}     runs tests with Pest in parallel mode."
+    echo -e "${GREEN}./sail tinker ${NC}   opens a Laravel Tinker console."
+    echo -e "${GREEN}./sail shell ${NC}    opens a shell inside your app container."
+    echo -e "${GREEN}./sail stop ${NC}     stops your app container."
     echo -e "\n${LABEL_ADOTE} Enjoy and have fun! ⭐ ${YELLOW}Star${NC} our repository: ${YELLOW}https://github.com/beerandcodeteam/adoteumdev${NC}\n"
 
 elif [ "$1" == "test" ]; then
