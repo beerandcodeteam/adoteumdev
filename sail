@@ -9,7 +9,7 @@ WHITE='\033[1;37m'
 GREEN='\033[0;32m'
 YELLOW='\033[1;33m'
 LABEL_ERROR="\n\033[048;5;9m ERROR ${NC} "
-LABEL_OK="\n\033[048;5;64m  OK   ${NC} "
+LABEL_OK="\n\033[048;5;64m   OK   ${NC} "
 LABEL_ADOTE="\n\033[048;5;167m \033[1m→ AdoteUm.Dev ${NC} "
 
 generateAppKey(){
@@ -25,8 +25,8 @@ generateAppKey(){
     fi
 }
 
-buildAppAssets(){
-    echo -e "${LABEL_ADOTE}building App Assets... 🎒"
+compileAppAssets(){
+    echo -e "${LABEL_ADOTE}compiling App Assets... 🎒"
 
     docker-compose exec \
     -u sail \
@@ -195,20 +195,22 @@ if [ "$1" == "init" ]; then
     fi
     
     generateAppKey
-    buildAppAssets
+    compileAppAssets
 
-    echo -e "${LABEL_OK}Everything is up and running!"
-    echo -e "\n⛵ Some useful commands are:\n"
+    echo -e "${LABEL_OK}Services are up and running!"
+
+    echo -e "\n⛵ Some useful commands:\n"
     echo -e "${GREEN}./sail art <cmd>${NC} runs a command with Laravel Artisan."
-    echo -e "${GREEN}./sail build${NC}     build assets (npm run dev)."
+    echo -e "${GREEN}./sail rdev${NC}      execute 'npm run dev' command."
     echo -e "${GREEN}./sail test ${NC}     runs tests with Pest in parallel mode."
     echo -e "${GREEN}./sail tinker ${NC}   opens a Laravel Tinker console."
     echo -e "${GREEN}./sail shell ${NC}    opens a shell inside your app container."
     echo -e "${GREEN}./sail stop ${NC}     stops your app container."
-    echo -e "\n${LABEL_ADOTE} Enjoy and have fun! ⭐ ${YELLOW}Star${NC} our repository: ${YELLOW}https://github.com/beerandcodeteam/adoteumdev${NC}\n"
+    echo -e "\n${LABEL_ADOTE}is ready for you at ${YELLOW}${APP_URL}${NC} - Enjoy and have fun!"
+    echo -e "\n${YELLOW}⭐ Star${NC} our repository: ${YELLOW}https://github.com/beerandcodeteam/adoteumdev${NC}\n"
 
-elif [ "$1" == "build" ]; then
-    buildAppAssets
+elif [ "$1" == "rdev" ]; then
+    compileAppAssets
 
 elif [ "$1" == "test" ]; then
     shift 1
