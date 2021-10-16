@@ -21,25 +21,24 @@ it('checks if interests list was loaded', function () {
         ->assertSee("Assembly");
 });
 
-it('checks if interests form was stored successful', function () {
+it('stores interests form', function () {
     $payload = [
-        ['skill_id' => 1, 'level' => 3, 'category_id' => 1],
-        ['skill_id' => 2, 'level' => 4, 'category_id' => 1],
-        ['skill_id' => 3, 'level' => 1, 'category_id' => 1],
-        ['skill_id' => 4, 'level' => 5, 'category_id' => 1],
+        ['id' => 1, 'level' => 3, 'category_id' => 1],
+        ['id' => 2, 'level' => 4, 'category_id' => 1],
+        ['id' => 3, 'level' => 1, 'category_id' => 1],
+        ['id' => 4, 'level' => 5, 'category_id' => 1],
     ];
 
     $user = User::firstWhere('email', '33piter@adoteum.dev');
 
+    $this->assertDatabaseMissing('interests', ['user_id' => $user->id]);
+
     actingAs($user->load('profile'));
 
-    $test = livewire(InterestScreen::class)
+    livewire(InterestScreen::class)
         ->set('payload', $payload)
-        ->call('save');
+        ->call('save')
+        ->assertRedirect(route('app.knowledge'));
 
-    assertDatabaseHas('interests', [
-        'user_id' => $user->id,
-    ]);
-
-    $test->assertRedirect(route('app.knowledge'));
+    $this->assertDatabaseHas('interests', ['user_id' => $user->id]);
 });

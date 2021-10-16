@@ -13,7 +13,7 @@ it('checks if knowledge url is working', function () {
         ->assertOk();
 });
 
-it('checks if knoledge list was loaded', function () {
+it('checks if knowledge list was loaded', function () {
     $user = User::firstWhere('email', '33piter@adoteum.dev');
 
     actingAs($user->load('profile'))
@@ -21,25 +21,24 @@ it('checks if knoledge list was loaded', function () {
         ->assertSee("Assembly");
 });
 
-it('checks if knowledge form was stored successful', function () {
+it('stores knowledge form', function () {
     $payload = [
-        ['skill_id' => 1, 'level' => 3, 'category_id' => 1],
-        ['skill_id' => 2, 'level' => 4, 'category_id' => 1],
-        ['skill_id' => 3, 'level' => 1, 'category_id' => 1],
-        ['skill_id' => 4, 'level' => 5, 'category_id' => 1],
+        ['id' => 1, 'level' => 3, 'category_id' => 1],
+        ['id' => 2, 'level' => 4, 'category_id' => 1],
+        ['id' => 3, 'level' => 1, 'category_id' => 1],
+        ['id' => 4, 'level' => 5, 'category_id' => 1],
     ];
 
     $user = User::firstWhere('email', '33piter@adoteum.dev');
 
+    $this->assertDatabaseMissing('knowledge', ['user_id' => $user->id]);
+
     actingAs($user->load('profile'));
 
-    $test = livewire(KnowledgeScreen::class)
+    livewire(KnowledgeScreen::class)
         ->set('payload', $payload)
-        ->call('save');
+        ->call('save')
+        ->assertRedirect(route('app.developers'));
 
-    assertDatabaseHas('knowledge', [
-        'user_id' => $user->id,
-    ]);
-
-    $test->assertRedirect(route('app.developers'));
+    $this->assertDatabaseHas('knowledge', ['user_id' => $user->id]);
 });
