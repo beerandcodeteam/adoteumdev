@@ -45,6 +45,8 @@ Before you begin:
 ## 3. Pull Request Guidelines
 - If adding new feature:
   - Provide convincing reason to add this feature. Ideally you should open a suggestion issue first and have it greenlighted before working on it.
+  - Include tests for all code you add or modify.
+  - Please ensure all [tests](#7-tests) are passing.
 
 - If fixing a bug:
   - If you are resolving a special issue, add `(fix: #xxxx[,#xxx])` (#xxxx is the issue id) in your PR title for a better release log, e.g. `fix: update entities encoding/decoding (fix #3899)`.
@@ -131,3 +133,15 @@ With everything resolved, the time has definitely come to see the application wo
 
 📝 Note
 > Where ${APP_PORT} should be replaced by the port number informed in your '.env' file, if you did not enter a port number, the default port used will be `80`.
+
+<br />
+
+## 7. Tests
+
+AdoteUm.Dev uses [Pest](https://pestphp.com/) PHP Test Framework.
+
+To run tests, execute the command:
+
+```bash
+$ ./sail test
+```
