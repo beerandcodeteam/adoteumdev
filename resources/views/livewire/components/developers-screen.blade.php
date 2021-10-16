@@ -105,7 +105,7 @@
     </div>
 
     <div class="flex flex-row items-center justify-between w-full">
-        <div class="cursor-pointer transform duration-150 active:scale-95">
+        <button wire:click="action('toUserId', 'dislike')" type="button" class="transform duration-150 active:scale-95">
             <div class="rounded-full shadow-lg bg-white p-3">
 
                 <x-svg-gradient
@@ -122,8 +122,9 @@
                     />
                 </x-svg-gradient>
             </div>
-        </div>
-        <div class="cursor-pointer transform duration-150 active:scale-95">
+        </button>
+
+        <button wire:click="action('toUserId', 'superlike')" type="button" class="transform duration-150 active:scale-95">
             <div class="rounded-full shadow-lg bg-white p-3">
 
                 <x-svg-gradient
@@ -138,8 +139,9 @@
                     />
                 </x-svg-gradient>
             </div>
-        </div>
-        <div class="cursor-pointer transform duration-150 active:scale-95">
+        </button>
+
+        <button wire:click="action('toUserId', 'like')" type="button" class="transform duration-150 active:scale-95">
             <div class="rounded-full shadow-lg bg-white p-3">
 
                 <x-svg-gradient
@@ -156,6 +158,6 @@
                     />
                 </x-svg-gradient>
             </div>
-        </div>
+        </button>
     </div>
 </div>
