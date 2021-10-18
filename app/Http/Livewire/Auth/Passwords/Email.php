@@ -2,7 +2,7 @@
 
 namespace App\Http\Livewire\Auth\Passwords;
 
-use Livewire\Component;
+use App\Http\Livewire\Core\Component;
 use Illuminate\Support\Facades\Password;
 
 class Email extends Component

@@ -11,7 +11,7 @@ use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
-use Livewire\Component;
+use App\Http\Livewire\Core\Component;
 
 class DevelopersScreen extends Component
 {

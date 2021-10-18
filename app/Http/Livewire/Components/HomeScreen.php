@@ -5,7 +5,7 @@ namespace App\Http\Livewire\Components;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
-use Livewire\Component;
+use App\Http\Livewire\Core\Component;
 use Livewire\Redirector;
 
 class HomeScreen extends Component

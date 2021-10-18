@@ -2,7 +2,7 @@
 
 namespace App\Http\Livewire\Auth\Passwords;
 
-use Livewire\Component;
+use App\Http\Livewire\Core\Component;
 
 class Confirm extends Component
 {

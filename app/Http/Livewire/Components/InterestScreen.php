@@ -6,9 +6,7 @@ namespace App\Http\Livewire\Components;
 
 use App\Models\Category;
 use App\Models\Interest;
-use Illuminate\Contracts\View\Factory;
-use Illuminate\Contracts\View\View;
-use Livewire\Component;
+use App\Http\Livewire\Core\Component;
 
 class InterestScreen extends Component
 {

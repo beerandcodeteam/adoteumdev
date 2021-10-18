@@ -2,9 +2,8 @@
 
 namespace App\Http\Livewire\Auth;
 
-use App\Providers\RouteServiceProvider;
 use Illuminate\Support\Facades\Auth;
-use Livewire\Component;
+use App\Http\Livewire\Core\Component;
 
 class Verify extends Component
 {

@@ -6,7 +6,7 @@ namespace App\Http\Livewire\Components;
 
 use App\Models\Category;
 use App\Models\Knowledge;
-use Livewire\Component;
+use App\Http\Livewire\Core\Component;
 
 class KnowledgeScreen extends Component
 {
