@@ -1,0 +1,17 @@
+<?php
+
+namespace [namespace];
+
+use App\Http\Livewire\Core\Component;
+
+class [class] extends Component
+{
+    public function render()
+    {
+        return <<<'blade'
+            <div>
+                {{-- [quote] --}}
+            </div>
+        blade;
+    }
+}
