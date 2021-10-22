@@ -1,0 +1,48 @@
+name: Tests
+
+on:
+  pull_request:
+    paths-ignore:
+      - '**.md'
+      - '**.gitignore'
+      - '**.prettierrc'
+
+jobs:
+  ci:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
+        php: ['8.0','8.1']
+        dependency-version: [prefer-stable]
+        parallel: ['--parallel']
+
+    name: PHP ${{ matrix.php }} - ${{ matrix.os }} - ${{ matrix.dependency-version }} - ${{ matrix.parallel }}
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+      if: startsWith(github.head_ref, 'dependabot') == false
+
+    - name: Setup PHP
+      uses: shivammathur/setup-php@v2
+      if: startsWith(github.head_ref, 'dependabot') == false
+      with:
+        php-version: ${{ matrix.php }}
+        extensions: mbstring, dom, fileinfo, mysql
+        tools: composer:v2
+        coverage: none
+
+    - name: Install PHP dependencies
+      if: startsWith(github.head_ref, 'dependabot') == false
+      run: composer update --${{ matrix.dependency-version }} --ignore-platform-req=php --no-interaction --no-progress
+
+    - name: Setup Laravel
+      if: startsWith(github.head_ref, 'dependabot') == false
+      run: |
+        cp .env.example .env
+        php artisan key:generate
+
+    - name: Running tests
+      if: startsWith(github.head_ref, 'dependabot') == false
+      run: vendor/bin/pest ${{ matrix.parallel }} --colors=always
