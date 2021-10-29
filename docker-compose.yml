@@ -85,13 +85,52 @@ services:
             - '/dev/shm:/dev/shm'
        networks:
            - sail
+    sonarscanner:
+        image: sonarsource/sonar-scanner-cli
+        profiles: ["scan"]
+        depends_on:
+          - sonarqube
+    sonarqube:
+        image: sonarqube:community
+        depends_on:
+          - sonarqubedb
+        environment:
+          SONAR_JDBC_URL: jdbc:postgresql://sonarqubedb:5432/sonar
+          SONAR_JDBC_USERNAME: sonar
+          SONAR_JDBC_PASSWORD: sonar
+        volumes:
+          - sonarqube_data:/opt/sonarqube/data
+          - sonarqube_extensions:/opt/sonarqube/extensions
+          - sonarqube_logs:/opt/sonarqube/logs
+        ports:
+          - "${FORWARD_SONAR_PORT:-9000}:9000"
+    sonarqubedb:
+      image: postgres:12
+      ports:
+        - "${FORWARD_SONAR_DB_PORT:-5432}:5432"
+      environment:
+        POSTGRES_USER: sonar
+        POSTGRES_PASSWORD: sonar
+      volumes:
+        - postgresql:/var/lib/postgresql
+        - postgresql_data:/var/lib/postgresql/data
 networks:
     sail:
-        driver: bridge
+      driver: bridge
 volumes:
     sailmysql:
         driver: local
     sailredis:
         driver: local
     sailmeilisearch:
+        driver: local
+    sonarqube_data:
+        driver: local
+    sonarqube_extensions:
+        driver: local
+    sonarqube_logs:
+        driver: local
+    postgresql:
+        driver: local
+    postgresql_data:
         driver: local
