@@ -14,7 +14,7 @@ LABEL_ADOTE="\n\033[048;5;167m \033[1m→ AdoteUm.Dev ${NC} "
 
 generateAppKey(){
     HAS_KEY=$(grep APP_KEY=base64 .env)
-        
+
     if [  -f ./.env ] && [ -z "$HAS_KEY"  ]; then
         echo -e "${LABEL_ADOTE}generating App Key... 🗝️"
 
@@ -36,7 +36,7 @@ compileAppAssets(){
 
 checkDependencies() {
      if [ ! -d ./vendor ] || [ ! -f ./vendor/bin/sail ] || [ ! -d ./node_modules ] || [ -z "$(ls -A ./node_modules)" ]; then
-        AdoteBanner     
+        AdoteBanner
         read -p "$(echo -e "${LABEL_ERROR}It seems your app is missing package dependencies. ${GREEN}Let's download them now${NC} [y/N]? ")"  ANSWER
 
         if [[ $ANSWER == "y" || $ANSWER == "Y" || $ANSWER == "yes" || $ANSWER == "YES" ]] ; then
@@ -70,6 +70,10 @@ configureSail() {
 
     if [ ! -f $ENVFILE ]; then
         cp .env.example .env
+    fi
+
+    if [ ! -f './.sonar.example' ]; then
+        cp .sonar.example sonar-project.properties
     fi
 
     if [ -d ./vendor ] && [ -f ./vendor/bin/sail ]; then
@@ -193,7 +197,7 @@ if [ "$1" == "init" ]; then
         echo -e "${LABEL_ERROR}Some services could not be started. Check the output above."
         exit 1;
     fi
-    
+
     generateAppKey
     compileAppAssets
 
@@ -211,6 +215,17 @@ if [ "$1" == "init" ]; then
 
 elif [ "$1" == "rdev" ]; then
     compileAppAssets
+
+elif [ "$1" == "scan" ]; then
+    shift 1
+
+    docker-compose run \
+        --rm \
+        --user="$(id -u):$(id -g)" \
+        -e SONAR_HOST_URL="http://${SONAR_URL}:${SONAR_PORT}"  \
+        -e SONAR_LOGIN="${SONAR_AUTHENTICATION}" \
+        -v $(pwd):/usr/src \
+        sonarscanner -Dproject.settings=./sonar-project.properties
 
 elif [ "$1" == "test" ]; then
     shift 1
