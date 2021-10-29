@@ -4,6 +4,8 @@
 /public/css
 /public/js
 /storage/*.key
+/.scannerwork
+sonar-project.properties
 /vendor
 .env
 .env.backup
