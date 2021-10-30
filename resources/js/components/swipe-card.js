@@ -1,6 +1,7 @@
 document.addEventListener("alpine:init", () => {
     Alpine.data("swipeCard", (params) => {
         return {
+            developers: params.developers,
             element: null,
             clicked: false,
             startX: 0,
@@ -76,10 +77,7 @@ document.addEventListener("alpine:init", () => {
                 this.like = false
                 this.dislike = false
 
-                this.$nextTick()
-                    .then(() => {
-                        this.showelement = false
-                    })
+
             },
             ...params,
         }

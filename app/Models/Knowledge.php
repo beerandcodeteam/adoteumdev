@@ -32,8 +32,8 @@ class Knowledge extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function skills(): HasMany
+    public function skill(): BelongsTo
     {
-        return $this->hasMany(Skill::class);
+        return $this->belongsTo(Skill::class);
     }
 }

@@ -43,7 +43,7 @@ class DevelopersScreen extends Component
             ->with([
                 'profile',
                 'receivedActions',
-                'knowledge',
+                'knowledge.skill',
             ])
             ->whereHas('knowledge', function ($query) {
                 $this->loggedUser->interests->each(function (Interest $interest, $key) use ($query) {
@@ -61,8 +61,47 @@ class DevelopersScreen extends Component
                     ->where('expiration_at', '>=', now());
             })
             ->where('id', '<>', $this->loggedUser->id)
-            ->paginate(perPage: 5, page: $page)
-            ->toArray();
+            ->paginate(perPage: 5, page: $page);
+
+        $devs = collect($this->developers->items());
+        $devs->map(function ($dev) {
+            $dev->stack = "";
+            $dev->commonknolowdge = "";
+
+            $programingLang = $dev->knowledge
+                ->filter(function($knowledge) {
+                    return $knowledge->skill->category_id === 1;
+                })
+                ->sortByDesc('level')
+                ->first();
+
+            $framework = $dev->knowledge
+                ->filter(function($knowledge) {
+                    return $knowledge->skill->category_id === 2;
+                })
+                ->sortByDesc('level')
+                ->first();
+
+            if ($programingLang) {
+                $dev->stack .= $programingLang->skill->name;
+            }
+
+            if ($framework) {
+                $dev->stack .= " {$framework->skill->name}";
+            }
+
+            $dev->stack .= " Developer";
+
+            $commonknolowdge = $dev->knowledge->filter(function ($knowledge) {
+                return $this->loggedUser->interests->where('skill_id', $knowledge->skill_id)->first();
+            });
+
+            $dev->commonknolowdge = "{$commonknolowdge->count()} interesses em comum [{$commonknolowdge->pluck('skill.name')->implode(', ')}]";
+
+        });
+
+        $this->developers = $this->developers->toArray();
+        $this->developers['data'] = $devs->toArray();
 
         $this->developers = Arr::only($this->developers, ['current_page', 'data', 'last_page', 'total']);
     }
