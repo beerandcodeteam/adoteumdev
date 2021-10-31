@@ -53,6 +53,7 @@ configureSail() {
     echo -e "${LABEL_ADOTE}is starting to download packages and self-configure."
 
     ENVFILE='./.env'
+    SONARFILE='sonar-project.properties'
 
     docker run --rm \
         -u "$(id -u):$(id -g)" \
@@ -72,7 +73,7 @@ configureSail() {
         cp .env.example .env
     fi
 
-    if [ ! -f './.sonar.example' ]; then
+    if [ ! -f $SONARFILE ]; then
         cp .sonar.example sonar-project.properties
     fi
 
