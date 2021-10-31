@@ -88,32 +88,54 @@ services:
     sonarscanner:
         image: sonarsource/sonar-scanner-cli
         profiles: ["scan"]
+        networks:
+            - sail
         depends_on:
-          - sonarqube
+            - sonarqube
     sonarqube:
         image: sonarqube:community
-        depends_on:
-          - sonarqubedb
         environment:
-          SONAR_JDBC_URL: jdbc:postgresql://sonarqubedb:5432/sonar
-          SONAR_JDBC_USERNAME: sonar
-          SONAR_JDBC_PASSWORD: sonar
+            SONAR_JDBC_URL: jdbc:postgresql://sonarqubedb:5432/sonar
+            SONAR_JDBC_USERNAME: sonar
+            SONAR_JDBC_PASSWORD: sonar
         volumes:
-          - sonarqube_data:/opt/sonarqube/data
-          - sonarqube_extensions:/opt/sonarqube/extensions
-          - sonarqube_logs:/opt/sonarqube/logs
+            - sonarqube_data:/opt/sonarqube/data
+            - sonarqube_extensions:/opt/sonarqube/extensions
+            - sonarqube_logs:/opt/sonarqube/logs
+            - sonarqube_temp:/opt/sonarqube/temp
+        ulimits:
+            nproc: 131072
+            nofile:
+                soft: 8192
+                hard: 131072
         ports:
-          - "${FORWARD_SONAR_PORT:-9000}:9000"
+            - "${FORWARD_SONAR_PORT:-9000}:9000"
+        networks:
+            - sail
+        depends_on:
+            - sonarqubeinit
+            - sonarqubedb
+    sonarqubeinit:
+        image: bash
+        privileged: true
+        user: root
+        volumes:
+            - ./docker/sonarqube/init.sh:/mnt/init.sh
+        command: ["sh", "-e", "/mnt/init.sh"]
+        networks:
+            - sail
     sonarqubedb:
-      image: postgres:12
-      ports:
-        - "${FORWARD_SONAR_DB_PORT:-5432}:5432"
-      environment:
-        POSTGRES_USER: sonar
-        POSTGRES_PASSWORD: sonar
-      volumes:
-        - postgresql:/var/lib/postgresql
-        - postgresql_data:/var/lib/postgresql/data
+        image: postgres:12
+        ports:
+            - "${FORWARD_SONAR_DB_PORT:-5432}:5432"
+        environment:
+            POSTGRES_USER: sonar
+            POSTGRES_PASSWORD: sonar
+        volumes:
+            - postgresql:/var/lib/postgresql
+            - postgresql_data:/var/lib/postgresql/data
+        networks:
+            - sail
 networks:
     sail:
       driver: bridge
@@ -129,6 +151,8 @@ volumes:
     sonarqube_extensions:
         driver: local
     sonarqube_logs:
+        driver: local
+    sonarqube_temp:
         driver: local
     postgresql:
         driver: local
