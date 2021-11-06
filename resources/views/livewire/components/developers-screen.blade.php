@@ -22,93 +22,122 @@
     </div>
 
     <div
-        class="flex flex-1 w-full flex-row items-start justify-center relative mt-4"
+        class="flex flex-1 w-full flex-row justify-center relative mt-4"
+        :class="developers.data.length === 0 ? 'items-center' : 'items-start'"
         x-ref="cardbox"
     >
 
         <template
-            x-for="(dev, index) in developers.data"
+            x-if="developers.data.length === 0"
         >
-            <div
-                x-ref="swipecard"
-                class="flex w-full absolute transition transform duration-500 ease-in-out select-none"
-                x-on:pointerdown="mouseclick"
-                x-on:pointermove="movingcard"
-                x-on:pointerup="releasecard"
-                x-on:pointercancel="releasecard"
-                x-on:pointerleave="releasecard"
+
+            <div class="flex flex-col items-center justify-center relative">
+                <x-logo-gradient class="w-14 h-14 fill-current z-50 animate-pulse-aud" />
+
+                <p class="text-md text-gray-75 mt-10 font-bold">
+                    Estamos procurando mais devs com seus interesses!
+                </p>
+            </div>
+
+        </template>
+
+        <template
+            x-if="developers.data.length > 0"
+        >
+            <template
+                x-for="(dev, index) in developers.data"
             >
-                <div class="relative w-full cursor-pointer overflow-hidden h-swipe max-h-swipe">
-
-                    <div
-                        class="flex flex-row w-full items-center absolute top-0 left-0 p-4"
-                        x-ref="actionbox"
-                    >
-                        <div
-                            x-show="like"
-                            x-ref="like"
-                            class="bg-green-500 py-1 px-6 text-white font-bold rounded-full"
-                        >
-                            LIKE
-                        </div>
+                <div
+                    :key="`dev${dev.id}`"
+                    :id="`dev${dev.id}`"
+                    class="flex w-full absolute left-0 top-0 transform duration-500 ease-in-out select-none"
+                    x-on:pointerdown="mouseclick"
+                    x-on:pointermove="movingcard($event, dev.id)"
+                    x-on:pointerup="releasecard"
+                    x-on:pointercancel="releasecard"
+                    x-on:pointerleave="releasecard"
+                >
+                    <div class="relative w-full cursor-pointer overflow-hidden h-swipe max-h-swipe">
 
                         <div
-                            x-show="dislike"
-                            x-ref="dislike"
-                            class="bg-primary-100 py-1 px-6 text-white font-bold rounded-full"
+                            class="flex flex-row w-full items-center absolute top-0 left-0 p-4"
+                            x-ref="actionbox"
+                            :id="`actionbox${dev.id}`"
                         >
-                            NOPE
-                        </div>
-                    </div>
-
-                    <img
-                        class="w-full h-swipe object-cover object-center rounded-md pointer-events-none"
-                        :src="dev.profile.avatar"
-                    />
-
-                    <div
-                        class="text-md rounded-md text-white absolute bottom-0 left-0 flex flex-col w-full p-4 space-y-2 bg-gradient-to-t from-black via-black-50 "
-                    >
-                        <div class="flex flex-row items-center">
-                            <span class="font-bold" x-text="dev.name"></span>
-                        </div>
-                        <span x-text="dev.stack"></span>
-                        <span x-text="dev.commonknolowdge"></span>
-                        <div class="flex flex-row items-center w-full space-x-6 ">
-
-                            <div class="flex flex-row items-center">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
-                                </svg>
-                                <span class="text-xs font-bold ml-1" x-text="dev.profile.data.followers"></span>
+                            <div
+                                :id="`like${dev.id}`"
+                                x-ref="like"
+                                class="bg-green-500 py-1 px-6 text-white font-bold rounded-full hidden"
+                            >
+                                LIKE
                             </div>
 
-                            <div class="flex flex-row items-center">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 4v12l-4-2-4 2V4M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                                </svg>
-                                <span class="text-xs font-bold ml-1" x-text="dev.profile.data.public_repos"></span>
+                            <div
+                                :id="`superlike${dev.id}`"
+                                x-ref="like"
+                                class="bg-blue-100 py-1 px-6 self-center text-white font-bold rounded-full hidden"
+                            >
+                                SUPERLIKE
                             </div>
 
-                            <div class="flex flex-row items-center">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z" />
-                                </svg>
-                                <span class="text-xs font-bold ml-1" x-text="dev.profile.data.public_gists"></span>
+                            <div
+                                :id="`dislike${dev.id}`"
+                                x-ref="dislike"
+                                class="bg-primary-100 py-1 px-6 text-white font-bold rounded-full hidden"
+                            >
+                                NOPE
                             </div>
-
                         </div>
+
+                        <img
+                            class="w-full h-swipe object-cover object-center rounded-md pointer-events-none"
+                            :src="dev.profile.avatar"
+                        />
+
+                        <div
+                            class="text-md rounded-md text-white absolute bottom-0 left-0 flex flex-col w-full p-4 space-y-2 bg-gradient-to-t from-black via-black-50 "
+                        >
+                            <div class="flex flex-row items-center">
+                                <span class="font-bold" x-text="dev.name"></span>
+                            </div>
+                            <span x-text="dev.stack"></span>
+                            <span x-text="dev.commonknolowdge"></span>
+                            <div class="flex flex-row items-center w-full space-x-6 ">
+
+                                <div class="flex flex-row items-center">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
+                                    </svg>
+                                    <span class="text-xs font-bold ml-1" x-text="dev.profile.data.followers"></span>
+                                </div>
+
+                                <div class="flex flex-row items-center">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 4v12l-4-2-4 2V4M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                                    </svg>
+                                    <span class="text-xs font-bold ml-1" x-text="dev.profile.data.public_repos"></span>
+                                </div>
+
+                                <div class="flex flex-row items-center">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z" />
+                                    </svg>
+                                    <span class="text-xs font-bold ml-1" x-text="dev.profile.data.public_gists"></span>
+                                </div>
+
+                            </div>
+                        </div>
+
                     </div>
 
                 </div>
-
-            </div>
+            </template>
         </template>
 
     </div>
 
     <div class="flex flex-row items-center justify-between w-full">
-        <button wire:click="action('toUserId', 'dislike')" type="button" class="transform duration-150 active:scale-95">
+        <button x-on:click="action('dislike')" type="button" class="transform duration-150 active:scale-95">
             <div class="rounded-full shadow-lg bg-white p-3">
 
                 <x-svg-gradient
@@ -127,7 +156,7 @@
             </div>
         </button>
 
-        <button wire:click="action('toUserId', 'superlike')" type="button" class="transform duration-150 active:scale-95">
+        <button x-on:click="action('superlike')" type="button" class="transform duration-150 active:scale-95">
             <div class="rounded-full shadow-lg bg-white p-3">
 
                 <x-svg-gradient
@@ -144,7 +173,7 @@
             </div>
         </button>
 
-        <button wire:click="action('toUserId', 'like')" type="button" class="transform duration-150 active:scale-95">
+        <button x-on:click="action('like')" type="button" class="transform duration-150 active:scale-95">
             <div class="rounded-full shadow-lg bg-white p-3">
 
                 <x-svg-gradient

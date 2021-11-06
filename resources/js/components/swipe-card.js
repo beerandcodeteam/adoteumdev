@@ -15,13 +15,13 @@ document.addEventListener("alpine:init", () => {
             init() { },
             mouseclick(event) {
                 this.clicked = true
-                this.element = this.$refs.swipecard;
+                this.element = event.target;
                 this.elementBoundary = this.element.getBoundingClientRect();
                 this.cardBoxBoundary = this.$refs.cardbox.getBoundingClientRect();
                 this.startX = event.clientX
                 this.startY = event.clientY
             },
-            movingcard(event) {
+            movingcard(event, id) {
                 if (this.clicked) {
                     this.element.classList.add('transition')
                     let deltaX = event.clientX - this.startX
@@ -35,48 +35,93 @@ document.addEventListener("alpine:init", () => {
                     this.dislike = false
                     this.like = false
 
-                    this.$refs.actionbox.classList.remove('justify-start')
-                    this.$refs.actionbox.classList.remove('justify-end')
+                    const actionbox = document.getElementById(`actionbox${id}`)
+                    const like = document.getElementById(`like${id}`)
+                    const dislike = document.getElementById(`dislike${id}`)
+
+                    actionbox.classList.remove('justify-start')
+                    actionbox.classList.remove('justify-end')
 
                     if (this.percentage > 0) {
-                        this.$refs.actionbox.classList.add('justify-start')
+                        actionbox.classList.add('justify-start')
                         this.element.classList.add('rotate-6')
                         this.element.classList.remove('-rotate-6')
                         this.like = true
-                        this.$refs.like.style.opacity = this.percentage
+                        like.style.opacity = this.percentage
+                        like.classList.remove('hidden')
+                        dislike.classList.add('hidden')
                         if (this.percentage >= 0.6) {
-                            this.$refs.like.style.opacity = 1
+                            like.style.opacity = 1
                         }
                     } else {
-                        this.$refs.actionbox.classList.add('justify-end')
+                        actionbox.classList.add('justify-end')
                         this.element.classList.add('-rotate-6')
                         this.element.classList.remove('rotate-6')
                         this.dislike = true
-                        this.$refs.dislike.style.opacity = -1 * this.percentage
+                        dislike.style.opacity = -1 * this.percentage
+                        dislike.classList.remove('hidden')
+                        like.classList.add('hidden')
                         if (this.percentage <= -0.6) {
-                            this.$refs.dislike.style.opacity = 1
+                            dislike.style.opacity = 1
                         }
                     }
                 }
             },
             releasecard() {
-                this.element.classList.remove('transition')
-                this.clicked = false
-                this.element.classList.remove('rotate-6')
-                this.element.classList.remove('-rotate-6')
+                if (this.clicked)
+                {
+                    this.element.classList.remove('transition')
+                    this.clicked = false
+                    this.element.classList.remove('rotate-6')
+                    this.element.classList.remove('-rotate-6')
 
-                if (this.percentage >= 0.6) {
-                    this.element.style.left = "10000px";
-                } else if (this.percentage <= -0.6) {
-                    this.element.style.left = "-10000px";
-                } else {
-                    this.element.style.left = 0;
-                    this.element.style.top = 0;
+                    if (this.percentage >= 0.6) {
+                        this.action('like')
+                    } else if (this.percentage <= -0.6) {
+                        this.action('dislike')
+                    } else {
+                        this.element.style.left = 0;
+                        this.element.style.top = 0;
+                    }
+
+                    this.like = false
+                    this.dislike = false
                 }
 
-                this.like = false
-                this.dislike = false
+            },
+            action(name) {
+                if (this.developers.data.length > 0) {
+                    const dev = this.developers.data[this.developers.data.length - 1]
 
+                    this.element = document.getElementById(`dev${dev.id}`)
+
+                    this.element.classList.remove('transition')
+                    if (name === 'like') {
+                        this.element.style['transition-duration'] = '0';
+                        this.element.classList.add('rotate-6')
+                        this.element.classList.remove('-rotate-6')
+                        setTimeout(() => {
+                            this.element.style['transition-duration'] = '1.5s';
+                            this.element.style.left = "10000px";
+                        },100)
+                    } else if (name === 'dislike') {
+                        this.element.style['transition-duration'] = '0';
+                        this.element.classList.add('-rotate-6')
+                        this.element.classList.remove('rotate-6')
+                        setTimeout(() => {
+                            this.element.style['transition-duration'] = '1.5s';
+                            this.element.style.left = "-10000px";
+                        },100)
+                    } else {
+                        this.element.style['transition-duration'] = '0.5s';
+                        this.element.style.top = "-1000px";
+                    }
+
+                    setTimeout(() => {
+                        this.$wire.action(dev.id, name)
+                        this.developers.data.pop()
+                    }, 500)
+                }
 
             },
             ...params,

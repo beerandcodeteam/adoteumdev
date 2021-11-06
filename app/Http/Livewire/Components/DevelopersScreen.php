@@ -19,7 +19,7 @@ class DevelopersScreen extends Component
 
     public mixed $developers;
 
-    public function action($toUserId, $actionName): void
+    public function action(int $toUserId, string $actionName): void
     {
         Action::updateOrCreate([
             'from_user_id' => $this->loggedUser->id,
@@ -37,7 +37,7 @@ class DevelopersScreen extends Component
         $this->getDevelopers();
     }
 
-    public function getDevelopers(string $page = '1'): void
+    public function getDevelopers(int $page = 1): void
     {
         $this->developers = User::select('id', 'name')
             ->with([

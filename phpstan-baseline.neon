@@ -1,0 +1,67 @@
+parameters:
+	ignoreErrors:
+		-
+			message: "#^PHPDoc type array of property App\\\\Exceptions\\\\Handler\\:\\:\\$dontFlash is not covariant with PHPDoc type array\\<string\\> of overridden property Illuminate\\\\Foundation\\\\Exceptions\\\\Handler\\:\\:\\$dontFlash\\.$#"
+			count: 1
+			path: app/Exceptions/Handler.php
+
+		-
+			message: "#^PHPDoc type array of property App\\\\Exceptions\\\\Handler\\:\\:\\$dontReport is not covariant with PHPDoc type array\\<string\\> of overridden property Illuminate\\\\Foundation\\\\Exceptions\\\\Handler\\:\\:\\$dontReport\\.$#"
+			count: 1
+			path: app/Exceptions/Handler.php
+
+		-
+			message: "#^Access to an undefined property Illuminate\\\\Database\\\\Eloquent\\\\Relations\\\\HasOne\\:\\:\\$provider\\.$#"
+			count: 1
+			path: app/Helpers/custom-helpers.php
+
+		-
+			message: "#^Parameter \\#1 \\$user of class Illuminate\\\\Auth\\\\Events\\\\Verified constructor expects Illuminate\\\\Contracts\\\\Auth\\\\MustVerifyEmail, App\\\\Models\\\\User\\|null given\\.$#"
+			count: 1
+			path: app/Http/Controllers/Auth/EmailVerificationController.php
+
+		-
+			message: "#^Method App\\\\Http\\\\Livewire\\\\Auth\\\\Login\\:\\:authenticate\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: app/Http/Livewire/Auth/Login.php
+
+		-
+			message: "#^Method App\\\\Http\\\\Livewire\\\\Auth\\\\Login\\:\\:render\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: app/Http/Livewire/Auth/Login.php
+
+		-
+			message: "#^Method App\\\\Http\\\\Livewire\\\\Auth\\\\Passwords\\\\Confirm\\:\\:render\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: app/Http/Livewire/Auth/Passwords/Confirm.php
+
+		-
+			message: "#^Method App\\\\Http\\\\Livewire\\\\Auth\\\\Passwords\\\\Email\\:\\:render\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: app/Http/Livewire/Auth/Passwords/Email.php
+
+		-
+			message: "#^Property App\\\\Http\\\\Livewire\\\\Auth\\\\Passwords\\\\Email\\:\\:\\$emailSentMessage \\(string\\|null\\) does not accept default value of type false\\.$#"
+			count: 1
+			path: app/Http/Livewire/Auth/Passwords/Email.php
+
+		-
+			message: "#^Method App\\\\Http\\\\Livewire\\\\Auth\\\\Passwords\\\\Reset\\:\\:render\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: app/Http/Livewire/Auth/Passwords/Reset.php
+
+		-
+			message: "#^Method App\\\\Http\\\\Livewire\\\\Auth\\\\Passwords\\\\Reset\\:\\:resetPassword\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: app/Http/Livewire/Auth/Passwords/Reset.php
+
+		-
+			message: "#^Method App\\\\Http\\\\Livewire\\\\Auth\\\\Register\\:\\:render\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: app/Http/Livewire/Auth/Register.php
+
+		-
+			message: "#^Method App\\\\Http\\\\Livewire\\\\Auth\\\\Verify\\:\\:render\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: app/Http/Livewire/Auth/Verify.php
+
