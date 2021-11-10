@@ -113,17 +113,7 @@ services:
         networks:
             - sail
         depends_on:
-            - sonarqubeinit
             - sonarqubedb
-    sonarqubeinit:
-        image: bash
-        privileged: true
-        user: root
-        volumes:
-            - ./docker/sonarqube/init.sh:/mnt/init.sh
-        command: ["sh", "-e", "/mnt/init.sh"]
-        networks:
-            - sail
     sonarqubedb:
         image: postgres:12
         ports:
