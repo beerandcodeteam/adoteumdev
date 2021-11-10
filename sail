@@ -35,7 +35,7 @@ compileAppAssets(){
 }
 
 checkDependencies() {
-     if [ ! -d ./vendor ] || [ ! -f ./vendor/bin/sail ] || [ ! -d ./node_modules ] || [ -z "$(ls -A ./node_modules)" ]; then
+     if [ ! -d ./vendor ] || [ ! -f ./vendor/bin/sail ] || [ ! -f ./sonar-project.properties ] || [ ! -d ./node_modules ] || [ -z "$(ls -A ./node_modules)" ]; then
         AdoteBanner
         read -p "$(echo -e "${LABEL_ERROR}It seems your app is missing package dependencies. ${GREEN}Let's download them now${NC} [y/N]? ")"  ANSWER
 
@@ -49,8 +49,37 @@ checkDependencies() {
      fi
 }
 
+configureSonarqube() {
+    echo -e "${LABEL_ADOTE}configuring Sonarqube...🕵️"
+
+    SONARFILE='sonar-project.properties'
+
+    if [ ! -f $SONARFILE ]; then
+        cp .sonar.example sonar-project.properties
+    fi
+
+    if [ "$MACHINE" == linux ]; then
+        echo -e "${LABEL_ADOTE}${YELLOW}increasing vm settings to meet the needs of Elasticsearch when running on 64-bit linux systems${NC}..."
+
+        docker run -d --rm \
+            --name init \
+            -u root \
+            --privileged \
+            -v "$(pwd)/docker/sonarqube/init.sh:/init.sh" \
+            bash \
+            sh -e /init.sh
+    fi
+
+    if [ -f ./sonar-project.properties ]; then
+        echo -e "${LABEL_OK}sonarqube is ready..."
+    else
+        echo -e "${LABEL_ERROR}Unkown error happend when configure sonarqube."
+        exit 1
+    fi
+}
+
 configureSail() {
-    echo -e "${LABEL_ADOTE}is starting to download packages and self-configure."
+    echo -e "${LABEL_ADOTE}downloading packages and self-configuring...⚙️"
 
     ENVFILE='./.env'
 
@@ -72,16 +101,12 @@ configureSail() {
         cp .env.example .env
     fi
 
-    if [ ! -f './.sonar.example' ]; then
-        cp .sonar.example sonar-project.properties
-    fi
-
-    if [ -d ./vendor ] && [ -f ./vendor/bin/sail ]; then
-        echo -e "${LABEL_OK}configuration done!"
+    if [ -d ./vendor ] && [ -f ./vendor/bin/sail ] && [ -d ./node_modules ]; then
+        echo -e "${LABEL_OK}sail is ready..."
         echo -e "${LABEL_ADOTE}You can start the app now. Run: ${GREEN}./sail init${NC} command."
         exit 0
     else
-        echo -e "${LABEL_ERROR}Unkown error happend."
+        echo -e "${LABEL_ERROR}Unkown error happend when configure sail."
         exit 1
     fi
 }
@@ -174,8 +199,8 @@ fi
 
 if [ "$1" == "config" ]; then
     AdoteBanner
+    configureSonarqube
     configureSail
-    exit 0;
 fi
 
 #############################################################
@@ -186,7 +211,7 @@ checkDependencies
 
 if [ "$1" == "init" ]; then
     AdoteBanner
-    echo -e "${LABEL_ADOTE}is starting..."
+    echo -e "${LABEL_ADOTE}is starting...🏁"
 
     ./vendor/bin/sail up --build --force-recreate -d
 
@@ -215,7 +240,6 @@ if [ "$1" == "init" ]; then
 
 elif [ "$1" == "rdev" ]; then
     compileAppAssets
-
 elif [ "$1" == "scan" ]; then
     shift 1
 
@@ -226,7 +250,6 @@ elif [ "$1" == "scan" ]; then
         -e SONAR_LOGIN="${SONAR_AUTHENTICATION}" \
         -v $(pwd):/usr/src \
         sonarscanner -Dproject.settings=./sonar-project.properties
-
 elif [ "$1" == "test" ]; then
     shift 1
     docker-compose exec \
