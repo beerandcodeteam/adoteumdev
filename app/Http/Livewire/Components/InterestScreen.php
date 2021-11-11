@@ -11,6 +11,7 @@ use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Livewire\Component;
+use Livewire\Redirector;
 
 class InterestScreen extends Component
 {
@@ -18,7 +19,7 @@ class InterestScreen extends Component
     public ?array $categories = [];
     public ?array $payload = [];
 
-    public function save(): RedirectResponse
+    public function save(): RedirectResponse | Redirector
     {
         try {
             $this->insertInterestsData();
