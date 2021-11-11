@@ -226,7 +226,9 @@ if [ "$1" == "init" ]; then
     generateAppKey
     compileAppAssets
 
-    echo -e "${LABEL_OK}Services are up and running!"
+    echo -e "${LABEL_OK}Services are up and running!\n"
+
+    echo -e "\n🕵️  Sonarqube is ready for you at ${YELLOW}http://localhost:${SONAR_PORT}${NC} - Username: ${YELLOW}admin${NC} Pass: ${YELLOW}admin${NC}\n"
 
     echo -e "\n⛵ Some useful commands:\n"
     echo -e "${GREEN}./sail art <cmd>${NC} runs a command with Laravel Artisan."
