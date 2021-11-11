@@ -82,6 +82,7 @@ configureSail() {
     echo -e "${LABEL_ADOTE}downloading packages and self-configuring...⚙️"
 
     ENVFILE='./.env'
+    SONARFILE='sonar-project.properties'
 
     docker run --rm \
         -u "$(id -u):$(id -g)" \

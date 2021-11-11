@@ -20,7 +20,7 @@ use Illuminate\Support\Carbon;
  * @property Carbon $email_verified_at
  * @property Carbon $created_at
  * @property Carbon $updated_at
- * @property-read HasOne profile
+ * @property-read HasOne $profile
  *
  */
 class User extends Authenticatable

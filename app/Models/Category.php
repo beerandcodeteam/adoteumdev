@@ -13,7 +13,7 @@ use Illuminate\Support\Carbon;
  * @property Carbon $created_at
  * @property Carbon $updated_at
  *
- * @property-read HasMany skills
+ * @property-read HasMany $skills
  */
 class Category extends Model
 {

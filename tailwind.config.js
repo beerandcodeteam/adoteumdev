@@ -12,7 +12,8 @@ module.exports = {
                     100: '#FE3C72',
                     75: '#FE6B94',
                     50: '#FE9DB8',
-                    25: '#FFCEDC'
+                    25: '#FFCEDC',
+                    opacity: 'rgba(254, 60, 114, 0.3)'
                 },
                 secondary: {
                     100: '#FF7854',
@@ -37,6 +38,16 @@ module.exports = {
             },
             height: {
                 swipe: 'calc(100vh - 200px)'
+            },
+            keyframes: {
+                'pulse-aud': {
+                    '0%': { transform: 'scale(1)' },
+                    '50%': { transform: 'scale(2)'},
+                    '100%': { transform: 'scale(1)'},
+                }
+            },
+            animation: {
+                'pulse-aud': 'pulse-aud 3s ease-in-out infinite'
             }
         },
     },

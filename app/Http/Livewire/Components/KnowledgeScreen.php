@@ -6,6 +6,10 @@ namespace App\Http\Livewire\Components;
 
 use App\Models\Category;
 use App\Models\Knowledge;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 use Livewire\Component;
 
 class KnowledgeScreen extends Component
@@ -14,7 +18,7 @@ class KnowledgeScreen extends Component
     public ?array $categories = [];
     public ?array $payload = [];
 
-    public function save()
+    public function save(): RedirectResponse
     {
         try {
             $this->insertKnowledgeData();
@@ -38,13 +42,13 @@ class KnowledgeScreen extends Component
         }
     }
 
-    public function mount()
+    public function mount(): void
     {
         $this->user = auth()->user()->load('profile')->toArray();
         $this->categories = Category::with('skills')->get()->toArray();
     }
 
-    public function render()
+    public function render(): Factory|View|Application
     {
         return view('livewire.components.knowledge-screen');
     }
