@@ -92,6 +92,7 @@
                         <img
                             class="w-full h-swipe object-cover object-center rounded-md pointer-events-none"
                             :src="dev.profile.avatar"
+                            alt="developer profile avatar"
                         />
 
                         <div
