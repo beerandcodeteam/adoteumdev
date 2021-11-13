@@ -6,6 +6,7 @@
 /storage/*.key
 /.scannerwork
 sonar-project.properties
+/ci
 /vendor
 .env
 .env.backup
