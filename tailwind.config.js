@@ -24,9 +24,12 @@ module.exports = {
                 gray: {
                     100: '#424242',
                     75: '#717171',
+                    65: '#c1c1c2',
                     50: '#A0A0A0',
+                    35: '#f6f6f7',
                     25: '#D4D8DD',
                     10: '#F7F8FC',
+
                 },
                 blue: {
                     100: '#35abf5',
@@ -35,6 +38,10 @@ module.exports = {
             },
             maxHeight: {
                 swipe: 'calc(100vh - 200px)'
+            },
+            minWidth: {
+                '8': '2rem',
+                '16': '4rem'
             },
             height: {
                 swipe: 'calc(100vh - 200px)'

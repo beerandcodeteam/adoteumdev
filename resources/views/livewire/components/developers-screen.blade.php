@@ -34,7 +34,7 @@
             <div class="flex flex-col items-center justify-center relative">
                 <x-logo-gradient class="w-14 h-14 fill-current z-50 animate-pulse-aud" />
 
-                <p class="text-md text-gray-75 mt-10 font-bold">
+                <p class="text-md text-gray-75 mt-10 font-bold text-center">
                     Estamos procurando mais devs com seus interesses!
                 </p>
             </div>

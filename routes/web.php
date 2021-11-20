@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Auth\SocialiteCallbackController;
 use App\Http\Livewire\Components\Chat;
+use App\Http\Livewire\Components\ChatList;
 use App\Http\Livewire\Components\DevelopersScreen;
 use App\Http\Livewire\Components\HomeScreen;
 use App\Http\Livewire\Components\InterestScreen;
@@ -20,7 +21,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('conhecimentos', KnowledgeScreen::class)->name('app.knowledge');
     Route::get('desenvolvedores', DevelopersScreen::class)->name('app.developers');
 
-    Route::get('chats', Chat::class)->name('app.chats');
+    Route::get('chat-list', ChatList::class)->name('app.chat-list');
+    Route::get('chat', Chat::class)->name('app.chat');
 });
 
 Route::group(['prefix' => 'auth', 'as' => 'socialite.'], function () {
