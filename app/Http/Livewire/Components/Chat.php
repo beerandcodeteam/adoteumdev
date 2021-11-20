@@ -14,7 +14,7 @@ class Chat extends Component
 
     public function mount()
     {
-        ChatStatusUpdated::dispatch('Hello World!');
+        //ChatStatusUpdated::dispatch('Hello World!');
     }
 
     public function render()
