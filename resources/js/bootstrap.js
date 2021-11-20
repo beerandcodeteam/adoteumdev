@@ -12,8 +12,8 @@ window.Pusher = require('pusher-js');
 
 window.Echo = new Echo({
     broadcaster: 'pusher',
-    key: 'ceac84d189f60fdf06a8', //TODO: adicionar para pegar como variável de ambiente
-    cluster: 'mt1',
+    key: process.env.MIX_PUSHER_APP_KEY,
+    cluster: process.env.MIX_PUSHER_APP_CLUSTER,
     forceTLS: true
 });
 
