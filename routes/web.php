@@ -22,7 +22,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('desenvolvedores', DevelopersScreen::class)->name('app.developers');
 
     Route::get('chat-list', ChatList::class)->name('app.chat-list');
-    Route::get('chat', Chat::class)->name('app.chat');
+    Route::get('chat/{user}', Chat::class)->name('app.chat');
 });
 
 Route::group(['prefix' => 'auth', 'as' => 'socialite.'], function () {

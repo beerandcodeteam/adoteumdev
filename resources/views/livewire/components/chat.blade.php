@@ -9,8 +9,8 @@
             </svg>
         </a>
         <div class="flex flex-col items-center">
-            <img class="rounded-full h-8 w-8" src="https://picsum.photos/200/300" />
-            <span class="text-gray-75 text-xs font-bold mt-2">Nome do caboclo</span>
+            <img class="rounded-full h-8 w-8" src="{{ $chatUser->profile->avatar }}" />
+            <span class="text-gray-75 text-xs font-bold mt-2">{{ $chatUser->name }}</span>
         </div>
         <div></div>
     </div>
@@ -42,9 +42,10 @@
     </div>
     <div class="flex flex-row w-full bg-gray-10 fixed bottom-0 p-7">
         <div class="relative w-full flex flex-col items-end justify-center">
-            <input name="chat" class="placeholder-gray-65 py-1 pl-4 pr-14 rounded-full w-full bg-gray-35 border border-gray-65" placeholder="Digite uma mensagem" />
-            <button class="bg-transparent text-sm text-gray-65 absolute mr-2">Enviar</button>
+            <input wire:model.defer="message" name="chat" class="placeholder-gray-65 py-1 pl-4 pr-14 rounded-full w-full bg-gray-35 border border-gray-65" placeholder="Digite uma mensagem" />
+            <button wire:click="sendMessage" class="bg-transparent text-sm text-gray-65 absolute mr-2">Enviar</button>
         </div>
     </div>
 
 </div>
+
