@@ -12,7 +12,7 @@ class CheckIfAutoLogin
     public function handle(Request $request, Closure $next): mixed
     {
         if (config('auth.auto_login')) {
-            Auth::loginUsingId(1);
+            Auth::loginUsingId(21);
 
             return redirect()->route('app.interest');
         }

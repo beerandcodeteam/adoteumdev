@@ -37,14 +37,16 @@ module.exports = {
                 }
             },
             maxHeight: {
-                swipe: 'calc(100vh - 200px)'
+                swipe: 'calc(100vh - 200px)',
+                chat: 'calc(100vh - 250px)'
             },
             minWidth: {
                 '8': '2rem',
                 '16': '4rem'
             },
             height: {
-                swipe: 'calc(100vh - 200px)'
+                swipe: 'calc(100vh - 200px)',
+                chat: 'calc(100vh - 250px)'
             },
             keyframes: {
                 'pulse-aud': {

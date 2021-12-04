@@ -19,27 +19,25 @@ class Chat extends Component
 
     public User $chatUser;
 
-    public string $message = '';
+    public $listeners = ['sendMessage'];
 
-    public function sendMessage()
+    public function sendMessage(string $message): void
     {
         $sentMessage = Message::create([
-            'from_user_id' => $this->loggedUser->id,
+            'from_user_id' => $this->loggedUser['id'],
             'to_user_id' => $this->chatUser->id,
-            'content' => $this->message,
+            'content' => $message,
         ]);
 
         ChatStatusUpdated::dispatch($sentMessage);
-
-        $this->reset('message');
     }
 
     private function hasMatch(): bool
     {
-        $actions = Action::where('from_user_id', $this->loggedUser->id)
+        $actions = Action::where('from_user_id', $this->loggedUser['id'])
             ->where('to_user_id', $this->chatUser->id)
             ->orWhere('from_user_id', $this->chatUser->id)
-            ->where('to_user_id', $this->loggedUser->id)
+            ->where('to_user_id', $this->loggedUser['id'])
             ->where('name', '<>', 'DISLIKE')
             ->get();
 
@@ -50,7 +48,8 @@ class Chat extends Component
 
     public function mount(User $user) {
         $this->loggedUser = User::with('profile', 'interests', 'knowledge', 'sentActions')
-            ->find(Auth::user()->id);
+            ->find(Auth::user()->id)
+            ->toArray();
 
         $this->chatUser = $user->load('profile');
 
@@ -59,11 +58,12 @@ class Chat extends Component
         }
 
         $this->receivedMessages = Message::where('from_user_id', $this->chatUser->id)
-            ->where('to_user_id', $this->loggedUser->id)
-            ->orWhere('from_user_id', $this->loggedUser->id)
+            ->where('to_user_id', $this->loggedUser['id'])
+            ->orWhere('from_user_id', $this->loggedUser['id'])
             ->where('to_user_id', $this->chatUser->id)
-            ->orderBy('id', 'desc')
-            ->get();
+            ->orderBy('id', 'asc')
+            ->get()
+            ->toArray();
     }
 
     public function render()

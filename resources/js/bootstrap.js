@@ -17,13 +17,3 @@ window.Echo = new Echo({
     forceTLS: true
 });
 
-
-window.Echo.channel('chats').listen('ChatStatusUpdated', event => {
-    console.log('Evento:');
-
-    // const messages = [];
-    // messages.push({'from_user_id': event.from_user_id, 'to_user_id': event.to_user_id , 'content': event.content});
-
-    console.log(event);
-});
-
