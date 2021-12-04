@@ -10,14 +10,17 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create('{{ table }}', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+        Schema::table('messages', function (Blueprint $table) {
+            $table->boolean('visualized')
+                ->after('content')
+                ->default(false);
         });
     }
 
     public function down(): void
     {
-        Schema::dropIfExists('{{ table }}');
+        Schema::table('messages', function (Blueprint $table) {
+            $table->dropColumn('visualized');
+        });
     }
 };

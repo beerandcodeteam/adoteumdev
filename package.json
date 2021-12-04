@@ -21,6 +21,8 @@
         "tailwindcss": "^2.2.4"
     },
     "dependencies": {
-        "alpinejs": "^3.2.3"
+        "alpinejs": "^3.2.3",
+        "laravel-echo": "^1.11.3",
+        "pusher-js": "^7.0.3"
     }
 }
