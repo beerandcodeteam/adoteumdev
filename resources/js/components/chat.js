@@ -6,10 +6,11 @@ document.addEventListener("alpine:init", () => {
             chatUser: params.chatUser,
             message: '',
             init() {
-                window.Echo.channel('chats').listen('ChatStatusUpdated', event => {
-                    this.receivedMessages.push(event.message);
-                    this.smoothScroll()
-                });
+                window.Echo.private(`chats.${this.loggedUser.id}.${this.chatUser.id}`)
+                    .listen('PrivateEvent', event => {
+                        this.receivedMessages.push(event.message);
+                        this.smoothScroll()
+                    });
 
                 this.smoothScroll()
             },

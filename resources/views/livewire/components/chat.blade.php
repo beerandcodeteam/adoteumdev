@@ -13,8 +13,8 @@
             </svg>
         </a>
         <div class="flex flex-col items-center">
-            <img class="rounded-full h-8 w-8" src="{{ $chatUser->profile->avatar }}" />
-            <span class="text-gray-75 text-xs font-bold mt-2">{{ $chatUser->name }}</span>
+            <img class="rounded-full h-8 w-8" src="{{ $chatUser['profile']['avatar'] }}" />
+            <span class="text-gray-75 text-xs font-bold mt-2">{{ $chatUser['name'] }}</span>
         </div>
         <div></div>
     </div>

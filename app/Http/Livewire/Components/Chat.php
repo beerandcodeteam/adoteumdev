@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Http\Livewire\Components;
 
 use App\Events\ChatStatusUpdated;
+use App\Events\PrivateEvent;
 use App\Models\Action;
 use App\Models\Message;
 use App\Models\User;
@@ -17,7 +18,7 @@ class Chat extends Component
 
     public $receivedMessages;
 
-    public User $chatUser;
+    public $chatUser;
 
     public $listeners = ['sendMessage'];
 
@@ -25,18 +26,19 @@ class Chat extends Component
     {
         $sentMessage = Message::create([
             'from_user_id' => $this->loggedUser['id'],
-            'to_user_id' => $this->chatUser->id,
+            'to_user_id' => $this->chatUser['id'],
             'content' => $message,
         ]);
 
-        ChatStatusUpdated::dispatch($sentMessage);
+//        ChatStatusUpdated::dispatch($sentMessage);
+        PrivateEvent::dispatch($sentMessage);
     }
 
     private function hasMatch(): bool
     {
         $actions = Action::where('from_user_id', $this->loggedUser['id'])
-            ->where('to_user_id', $this->chatUser->id)
-            ->orWhere('from_user_id', $this->chatUser->id)
+            ->where('to_user_id', $this->chatUser['id'])
+            ->orWhere('from_user_id', $this->chatUser['id'])
             ->where('to_user_id', $this->loggedUser['id'])
             ->where('name', '<>', 'DISLIKE')
             ->get();
@@ -51,16 +53,16 @@ class Chat extends Component
             ->find(Auth::user()->id)
             ->toArray();
 
-        $this->chatUser = $user->load('profile');
+        $this->chatUser = $user->load('profile')->toArray();
 
         if (!$this->hasMatch()) {
             return redirect()->route('app.chat-list');
         }
 
-        $this->receivedMessages = Message::where('from_user_id', $this->chatUser->id)
+        $this->receivedMessages = Message::where('from_user_id', $this->chatUser['id'])
             ->where('to_user_id', $this->loggedUser['id'])
             ->orWhere('from_user_id', $this->loggedUser['id'])
-            ->where('to_user_id', $this->chatUser->id)
+            ->where('to_user_id', $this->chatUser['id'])
             ->orderBy('id', 'asc')
             ->get()
             ->toArray();
