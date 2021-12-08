@@ -53,7 +53,7 @@ class InterestScreen extends Component
 
     public function mount(): void
     {
-        $this->typeLoadPage = request('type');
+        $this->typeLoadPage = request('type') ?? '';
         $this->user = auth()->user()
             ?->load('profile', 'interests.skill.category', 'knowledge')
             ->toArray();

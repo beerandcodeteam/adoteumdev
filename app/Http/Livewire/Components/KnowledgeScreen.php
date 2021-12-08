@@ -50,7 +50,7 @@ class KnowledgeScreen extends Component
 
     public function mount(): void
     {
-        $this->typeLoadPage = request('type');
+        $this->typeLoadPage = request('type') ?? '';
         $this->user = auth()->user()
             ?->load('profile', 'knowledge.skill.category', 'interests')
             ->toArray();
