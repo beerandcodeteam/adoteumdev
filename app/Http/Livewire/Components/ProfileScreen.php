@@ -17,7 +17,7 @@ class ProfileScreen extends Component
     use WithFileUploads;
 
     public array $loggedUser;
-    public $imageProfile;
+    public mixed $imageProfile = '';
 
     public function uploadAvatar(): void
     {

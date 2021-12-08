@@ -47,7 +47,7 @@
                                   class="w-full max-w-full text-xs items-center"></span>
                         </label>
                         <div class="w-full flex flex-row justify-end">
-                            <button type="submit" @click="files = null"
+                            <button type="submit" @click="files = null" x-show="files != null"
                                 class="mt-2 text-xs bg-white rounded-md shadow-md uppercase border
                                     border-primary-100 cursor-pointer hover:bg-primary-100 hover:text-white text-primary-100
                                     ease-linear transition-all py-1 px-2"
@@ -62,16 +62,16 @@
         <div class="mt-5 px-2">
             <div class="flex flex-row w-full">
                 <a href="{{ route('app.interest', 'edit') }}"
-                        class="flex flex-row space-x-2 justify-center items-center bg-primary-100 p-4 text-white
-                        w-full text-sm rounded-full mt-8 font-bold transform duration-150 active:scale-95"
+                    class="flex flex-row space-x-2 justify-center items-center bg-primary-100 p-4 text-white
+                    w-full text-sm rounded-full mt-8 font-bold transform duration-150 active:scale-95"
                 >
                     <span>Alterar interesses</span>
                 </a>
             </div>
             <div class="flex flex-row w-full">
                 <a href="{{ route('app.knowledge', 'edit') }}"
-                        class="flex flex-row space-x-2 justify-center items-center bg-primary-100 p-4 text-white
-                        w-full text-sm rounded-full mt-8 font-bold transform duration-150 active:scale-95"
+                    class="flex flex-row space-x-2 justify-center items-center bg-primary-100 p-4 text-white
+                    w-full text-sm rounded-full mt-8 font-bold transform duration-150 active:scale-95"
                 >
                     <span>Alterar habilidades</span>
                 </a>
