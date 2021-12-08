@@ -11,15 +11,13 @@ use App\Http\Livewire\Components\ProfileScreen;
 use App\Http\Livewire\Components\SplashScreen;
 use Illuminate\Support\Facades\Route;
 use Laravel\Socialite\Facades\Socialite;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 Route::get('/', SplashScreen::class)->name('app.splash');
 Route::get('home', HomeScreen::class)->name('app.home');
 
 Route::group(['middleware' => 'auth'], function () {
-    Route::get('interesses', InterestScreen::class)->name('app.interest');
-    Route::get('conhecimentos', KnowledgeScreen::class)->name('app.knowledge');
+    Route::get('interesses/{type?}', InterestScreen::class)->name('app.interest');
+    Route::get('conhecimentos/{type?}', KnowledgeScreen::class)->name('app.knowledge');
     Route::get('desenvolvedores', DevelopersScreen::class)->name('app.developers');
 
     Route::get('profile', ProfileScreen::class)->name('app.profile');

@@ -15,22 +15,21 @@ class ProfileScreen extends Component
     public array $loggedUser;
     public $imageProfile;
 
-    public function uploadAvatar()
+    public function uploadAvatar(): void
     {
         $this->validate([
             'imageProfile' => 'image',
         ]);
-        $this->imageProfile->store('avatarProfile');
-
+        $path = $this->imageProfile->store('avatarProfile', 'public');
         $profile = Profile::find($this->loggedUser['profile']['id']);
-        $profile->update([
-            'avatar' => $this->imageProfile->temporaryUrl()
-        ]);
+        $profile->avatar = url("storage/{$path}");
+        $profile->save();
+        $this->imageProfile = $profile->avatar;
     }
 
     public function mount(User $user)
     {
-        $this->loggedUser = User::with('profile', 'interests', 'knowledge', 'sentActions')
+        $this->loggedUser = User::with('profile')
             ->find(Auth::user()->id)?->toArray();
     }
 

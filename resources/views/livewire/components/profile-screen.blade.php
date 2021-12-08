@@ -36,7 +36,7 @@
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
                         </svg>
                         <span class="text-xs items-center">Alterar avatar</span>
-                        <input wire:model="imageProfile" wire:change.prevent="uploadAvatar" type="file"
+                        <input wire:model="imageProfile" wire:change="uploadAvatar" type="file"
                                class="hidden" name="imageProfile" />
                     </label>
                 </div>
@@ -46,14 +46,14 @@
         </div>
         <div class="mt-5 px-2">
             <div class="flex flex-row w-full">
-                <a href="{{ route('app.interest') }}"
+                <a href="{{ route('app.interest', 'edit') }}"
                         class="flex flex-row space-x-2 justify-center items-center bg-primary-100 p-4 text-white w-full text-sm rounded-full mt-8 font-bold transform duration-150 active:scale-95"
                 >
                     <span>Alterar interesses</span>
                 </a>
             </div>
             <div class="flex flex-row w-full">
-                <a href="{{ route('app.knowledge') }}"
+                <a href="{{ route('app.knowledge', 'edit') }}"
                         class="flex flex-row space-x-2 justify-center items-center bg-primary-100 p-4 text-white w-full text-sm rounded-full mt-8 font-bold transform duration-150 active:scale-95"
                 >
                     <span>Alterar habilidades</span>

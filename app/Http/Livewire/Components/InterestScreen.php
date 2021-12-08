@@ -15,6 +15,7 @@ use Livewire\Redirector;
 
 class InterestScreen extends Component
 {
+    public string $typeLoadPage = '';
     public array $user;
     public ?array $categories = [];
     public ?array $payload = [];
@@ -25,6 +26,9 @@ class InterestScreen extends Component
             $this->insertInterestsData();
 
             if (userIsDeveloper()) {
+                if ($this->typeLoadPage === 'edit') {
+                    return redirect()->route('app.profile');
+                }
                 return redirect()->route('app.knowledge');
             }
 
@@ -49,7 +53,11 @@ class InterestScreen extends Component
 
     public function mount(): void
     {
-        $this->user = auth()->user()->load('profile')->toArray();
+        $this->typeLoadPage = request('type');
+        $this->user = auth()->user()
+            ?->load('profile', 'interests.skill.category', 'knowledge')
+            ->toArray();
+        $this->user['typeResource'] = 'interests';
         $this->categories = Category::with('skills:id,category_id,name')
             ->select('id', 'name')
             ->get()

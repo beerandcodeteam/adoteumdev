@@ -36,4 +36,9 @@ class Interest extends Model
     {
         return $this->hasMany(Skill::class);
     }
+//    TODO: Validar utilidade/validade de skills
+    public function skill(): BelongsTo
+    {
+        return $this->belongsTo(Skill::class);
+    }
 }
