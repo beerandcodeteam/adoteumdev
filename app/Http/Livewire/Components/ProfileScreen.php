@@ -31,7 +31,12 @@ class ProfileScreen extends Component
     {
 //        TODO: validar local de upload.
 //        TODO: Cada vez que faz login, atualiza a imagem com a do github.
-        $path = $this->imageProfile->store('avatarProfile', 'public');
+        $nameAvatar = "avatar{$this->loggedUser['id']}.{$this->imageProfile->extension()}";
+        $path = $this->imageProfile->storeAs(
+            'avatarProfile',
+            $nameAvatar,
+            'public'
+        );
         $profile = Profile::find($this->loggedUser['profile']['id']);
         $profile->avatar = url("storage/{$path}");
 

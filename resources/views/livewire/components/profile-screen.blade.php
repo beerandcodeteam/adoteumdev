@@ -19,12 +19,8 @@
     <div class="mt-20 w-full">
         <div class="md:col-span-1">
             <div class="flex flex-col items-center justify-center space-y-2">
-                @if($this->imageProfile)
-                    <img class="inline-block h-24 w-24 rounded-full" src="{{ $this->imageProfile->temporaryUrl() }}"
-                         alt="" />
-                @else
-                    <img class="inline-block h-24 w-24 rounded-full" src="{{ $loggedUser['profile']['avatar'] }}" alt="" />
-                @endif
+                <img class="inline-block h-24 w-24 rounded-full" src="{{ $loggedUser['profile']['avatar'] }}" alt="" />
+
                 <div class="flex flex-row w-1/3 items-center justify-center">
                     <form name="formAvatar" action="" method="post" wire:submit.prevent="uploadAvatar">
                         <label
