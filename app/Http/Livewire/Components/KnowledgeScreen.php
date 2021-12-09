@@ -54,8 +54,19 @@ class KnowledgeScreen extends Component
         $this->user = auth()->user()
             ?->load('profile', 'knowledge.skill.category', 'interests')
             ->toArray();
+        $skillRemove = [];
+        if ($this->typeLoadPage === 'edit') {
+            foreach ($this->user['knowledge'] as $interests) {
+                $skillRemove[] = $interests['skill_id'];
+            }
+        }
+
         $this->user['typeResource'] = 'knowledge';
-        $this->categories = Category::with('skills')->get()->toArray();
+        $this->categories = Category::with([
+            'skills' => function ($query) use ($skillRemove) {
+                $query->whereNotIn('id', $skillRemove);
+            }
+        ])->get()->toArray();
     }
 
     public function render(): Factory|View|Application
