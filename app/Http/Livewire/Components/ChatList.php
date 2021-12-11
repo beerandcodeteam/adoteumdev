@@ -1,21 +1,61 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Livewire\Components;
 
+use App\Models\Action;
+use App\Models\Message;
+use App\Models\Profile;
 use App\Models\User;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
 class ChatList extends Component
 {
+    public mixed $loggedUser;
 
-    public $loggedUser;
+    public array $receivedActions;
 
-    public function mount() {
+    public array $receivedMessages;
+
+    public function mount(): void
+    {
         $this->loggedUser = User::with('profile', 'interests', 'knowledge', 'sentActions')
             ->find(Auth::user()->id);
+
+        $sentActions = $this->loggedUser->sentActions->pluck('to_user_id')->toArray();
+
+        $this->receivedActions = Action::with('fromUser.profile')
+            ->where('to_user_id', $this->loggedUser->id)
+            ->where('name', 'LIKE')
+            ->whereNotIn('from_user_id', $sentActions)
+            ->get()
+            ->toArray();
+
+        $this->receivedMessages = Action::with('fromUser.profile')
+            ->where('to_user_id', $this->loggedUser->id)
+            ->where('name', 'LIKE')
+            ->whereIn('from_user_id', $sentActions)
+            ->get()
+            ->toArray();
     }
-    public function render()
+
+    public function action(int $toUserId, string $actionName): void
+    {
+        Action::updateOrCreate([
+            'from_user_id' => $this->loggedUser->id,
+            'to_user_id' => $toUserId,
+            'name' => $actionName,
+            'expiration_at' => now()->addDays(15),
+        ]);
+    }
+
+    public function render(): Factory|View|Application
     {
         return view('livewire.components.chat-list');
     }

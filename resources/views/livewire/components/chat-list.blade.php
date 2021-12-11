@@ -19,12 +19,15 @@
         </h3>
 
         <div class="flex flex-row overflow-x-scroll mt-4">
-            <template x-for="i in 30">
-                <div :key="`devlist${i}`" :class="i === 1 ? 'ml-7' : ''" class="text-center min-w-16 h-22 mr-4">
-                    <img class="rounded min-w-16 h-20 object-cover" src="https://picsum.photos/200/300" />
-                    <span class="text-xs text-gray-100 font-bold">Lucas</span>
+            @foreach($receivedActions as $action)
+                <div class="text-center min-w-16 h-22 mr-4">
+
+                    <!-- Programar sapoha mano...do action -->
+                    <img x-on:click="action('dislike')" class="rounded min-w-16 h-20 object-cover" src="{{ $action['from_user']['profile']['avatar'] }}" />
+                    <span class="text-xs text-gray-100 font-bold">{{ $action['from_user']['name'] }}</span>
+
                 </div>
-            </template>
+            @endforeach
         </div>
     </div>
 
@@ -33,20 +36,19 @@
             Mensagens
         </h3>
 
-        <template x-for="i in 30">
+        @foreach($receivedMessages as $message)
             <div class="flex flex-row w-full mt-4 cursor-pointer transform duration-150 active:scale-95">
                 <div class="flex flex-row w-full items-center">
                     <div class="relative flex flex-col items-end justify-center">
-                        <img class="rounded-full w-14 h-14 object-cover" src="https://picsum.photos/200/300" />
-                        <div :class="i === 1 ? '' : 'hidden'" class="rounded-full absolute -right-2 h-4 w-4 border-2 border-gray-10 bg-primary-100"></div>
+                        <img class="rounded-full w-14 h-14 object-cover" src="{{ $message['from_user']['profile']['avatar'] }}" />
+                        <div class="rounded-full absolute -right-2 h-4 w-4 border-2 border-gray-10 bg-primary-100"></div>
                     </div>
                     <div class="flex flex-col ml-4">
-                        <span class="text-sm font-bold text-gray-100">Dev 1</span>
-                        <span class="text-xs text-gray-75">E ai mano Brown</span>
+                        <span class="text-sm font-bold text-gray-100">{{ $message['from_user']['name'] }}</span>
+{{--                        <span class="text-xs text-gray-75">{{ $message['content'] }}</span>--}}
                     </div>
                 </div>
             </div>
-        </template>
-
+        @endforeach
     </div>
 </div>
