@@ -15,6 +15,7 @@ use Livewire\Redirector;
 
 class InterestScreen extends Component
 {
+    public string $typeLoadPage = '';
     public array $user;
     public ?array $categories = [];
     public ?array $payload = [];
@@ -25,6 +26,9 @@ class InterestScreen extends Component
             $this->insertInterestsData();
 
             if (userIsDeveloper()) {
+                if ($this->typeLoadPage === 'edit') {
+                    return redirect()->route('app.profile');
+                }
                 return redirect()->route('app.knowledge');
             }
 
@@ -41,7 +45,7 @@ class InterestScreen extends Component
             Interest::query()->updateOrCreate([
                 'user_id' => auth()->user()->id,
                 'skill_id' => $skill['id'],
-            ],[
+            ], [
                 'level' => $skill['level'],
             ]);
         }
@@ -49,8 +53,23 @@ class InterestScreen extends Component
 
     public function mount(): void
     {
-        $this->user = auth()->user()->load('profile')->toArray();
-        $this->categories = Category::with('skills:id,category_id,name')
+        $this->typeLoadPage = request('type') ?? '';
+        $this->user = auth()->user()
+            ?->load('profile', 'interests.skill.category', 'knowledge')
+            ->toArray();
+        $skillRemove = [];
+        if ($this->typeLoadPage === 'edit') {
+            foreach ($this->user['interests'] as $interests) {
+                $skillRemove[] = $interests['skill_id'];
+            }
+        }
+
+        $this->user['typeResource'] = 'interests';
+        $this->categories = Category::with([
+                'skills' => function ($query) use ($skillRemove) {
+                    $query->whereNotIn('id', $skillRemove);
+                }
+            ])
             ->select('id', 'name')
             ->get()
             ->toArray();

@@ -212,6 +212,12 @@ class UsersDefaultSeeder extends Seeder
                 'avatar' => 'https://avatars.githubusercontent.com/u/16943171?s=60&v=4',
                 'data' => '[]'
             ],
+            (object)[
+                'provider_user_id' => '22528943',
+                'nickname' => 'Kelver',
+                'avatar' => 'https://avatars.githubusercontent.com/u/22528943?s=96&v=4',
+                'data' => '[]'
+            ],
         ]);
     }
 

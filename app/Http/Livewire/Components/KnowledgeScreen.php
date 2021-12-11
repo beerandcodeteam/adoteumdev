@@ -15,6 +15,7 @@ use Livewire\Redirector;
 
 class KnowledgeScreen extends Component
 {
+    public string $typeLoadPage = '';
     public ?array $user = [];
     public ?array $categories = [];
     public ?array $payload = [];
@@ -23,6 +24,10 @@ class KnowledgeScreen extends Component
     {
         try {
             $this->insertKnowledgeData();
+
+            if ($this->typeLoadPage === 'edit') {
+                return redirect()->route('app.profile');
+            }
 
             return redirect()->route('app.developers');
         } catch (\Exception $exception) {
@@ -45,8 +50,23 @@ class KnowledgeScreen extends Component
 
     public function mount(): void
     {
-        $this->user = auth()->user()->load('profile')->toArray();
-        $this->categories = Category::with('skills')->get()->toArray();
+        $this->typeLoadPage = request('type') ?? '';
+        $this->user = auth()->user()
+            ?->load('profile', 'knowledge.skill.category', 'interests')
+            ->toArray();
+        $skillRemove = [];
+        if ($this->typeLoadPage === 'edit') {
+            foreach ($this->user['knowledge'] as $interests) {
+                $skillRemove[] = $interests['skill_id'];
+            }
+        }
+
+        $this->user['typeResource'] = 'knowledge';
+        $this->categories = Category::with([
+            'skills' => function ($query) use ($skillRemove) {
+                $query->whereNotIn('id', $skillRemove);
+            }
+        ])->get()->toArray();
     }
 
     public function render(): Factory|View|Application
