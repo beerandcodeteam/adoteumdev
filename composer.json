@@ -14,10 +14,10 @@
         "laravel/socialite": "^5.2",
         "laravel/tinker": "^2.5",
         "livewire/livewire": "^2.5",
-        "pusher/pusher-php-server": "^7.0"
+        "pusher/pusher-php-server": "^7.0",
+        "doctrine/dbal": "^3.2",
     },
     "require-dev": {
-        "doctrine/dbal": "^3.2",
         "facade/ignition": "^2.5",
         "fakerphp/faker": "^1.9.1",
         "friendsofphp/php-cs-fixer": "^3.0",
