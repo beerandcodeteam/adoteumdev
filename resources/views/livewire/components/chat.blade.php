@@ -7,7 +7,7 @@
     })"
 >
     <div class="flex flex-row w-full px-7 py-4 justify-between items-center fixed bg-gray-10 z-50 shadow">
-        <a href="{{ route('app.developers') }}"  class="cursor-pointer transform duration-150 active:scale-95">
+        <a href="{{ route('app.chat-list') }}"  class="cursor-pointer transform duration-150 active:scale-95">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-gray-25" viewBox="0 0 20 20 " fill="currentColor">
                 <path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd" />
             </svg>
@@ -19,7 +19,7 @@
         <div></div>
     </div>
 
-    <div class="mt-28 px-7 h-chat overflow-y-scroll" x-ref="chatContainer">
+    <div class="mt-28 px-7 h-chat overflow-y-scroll w-full" x-ref="chatContainer">
         <template x-for="(message, index) in receivedMessages">
             <div class="flex flex-col flex-1 w-full">
                 <template x-if="loggedUser.id !== message.from_user_id">

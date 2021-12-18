@@ -28,7 +28,18 @@ class ChatList extends Component
         $this->loggedUser = User::with('profile', 'interests', 'knowledge', 'sentActions')
             ->find(Auth::user()->id);
 
-        $sentActions = $this->loggedUser->sentActions->pluck('to_user_id')->toArray();
+        $this->getData();
+    }
+
+    public function getData() {
+        $sentActions = $this->loggedUser->sentActions
+            ->pluck('to_user_id')
+            ->toArray();
+
+        $sentDislikes = $this->loggedUser->sentActions
+            ->where('name', 'DISLIKE')
+            ->pluck('to_user_id')
+            ->toArray();
 
         $this->receivedActions = Action::with('fromUser.profile')
             ->where('to_user_id', $this->loggedUser->id)
@@ -39,10 +50,12 @@ class ChatList extends Component
 
         $this->receivedMessages = Action::with('fromUser.profile')
             ->where('to_user_id', $this->loggedUser->id)
-            ->where('name', 'LIKE')
+            ->whereIn('name', ['LIKE', 'SUPERLIKE'])
             ->whereIn('from_user_id', $sentActions)
+            ->whereNotIn('from_user_id', $sentDislikes)
             ->get()
             ->toArray();
+
     }
 
     public function action(int $toUserId, string $actionName): void
@@ -53,6 +66,8 @@ class ChatList extends Component
             'name' => $actionName,
             'expiration_at' => now()->addDays(15),
         ]);
+
+        $this->mount();
     }
 
     public function render(): Factory|View|Application

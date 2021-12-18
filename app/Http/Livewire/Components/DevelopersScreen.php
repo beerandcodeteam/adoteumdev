@@ -11,6 +11,7 @@ use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 use Livewire\Component;
 
 class DevelopersScreen extends Component
@@ -27,6 +28,15 @@ class DevelopersScreen extends Component
             'name' => $actionName,
             'expiration_at' => now()->addDays(15),
         ]);
+
+        if (Str::upper($actionName) === "SUPERLIKE") {
+            Action::updateOrCreate([
+                'from_user_id' => $toUserId,
+                'to_user_id' => $this->loggedUser->id,
+                'name' => $actionName,
+                'expiration_at' => now()->addDays(15),
+            ]);
+        }
     }
 
     public function mount(): void
