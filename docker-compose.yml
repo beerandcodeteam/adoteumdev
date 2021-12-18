@@ -85,13 +85,13 @@ services:
             - '/dev/shm:/dev/shm'
        networks:
            - sail
-    sonarscanner:
-        image: sonarsource/sonar-scanner-cli
-        profiles: ["scan"]
-        networks:
-            - sail
-        depends_on:
-            - sonarqube
+#    sonarscanner:
+#        image: sonarsource/sonar-scanner-cli
+#        profiles: ["scan"]
+#        networks:
+#            - sail
+#        depends_on:
+#            - sonarqube
     sonarqube:
         image: sonarqube:community
         environment:

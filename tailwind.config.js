@@ -44,6 +44,10 @@ module.exports = {
                 '8': '2rem',
                 '16': '4rem'
             },
+            maxWidth: {
+                '8': '2rem',
+                '16': '4rem'
+            },
             height: {
                 swipe: 'calc(100vh - 200px)',
                 chat: 'calc(100vh - 250px)'
