@@ -3,12 +3,9 @@
         <img src="public/assets/logo-adote-um-dev_v-doc.svg" alt="AdoteumDEV Logo in Base64" width="180" />
     </p>
     <p>
-        <!-- uncomment after enabled workflow -->
-        <!--
-        <a href="https://github.com/beerandcodeteam/adoteumdev/actions/workflows/laravel.yml">
-            <img src="https://github.com/beerandcodeteam/adoteumdev/actions/workflows/laravel.yml/badge.svg?branch=main" alt="Laravel" style="max-width:100%;" />
+        <a href="https://github.com/beerandcodeteam/adoteumdev/actions/workflows/tests.yml">
+            <img src="https://github.com/beerandcodeteam/adoteumdev/actions/workflows/tests.yml/badge.svg?branch=main" alt="Laravel" style="max-width:100%;" />
         </a>
-        -->
         <a href="https://github.com/beerandcodeteam/adoteumdev/blob/main/LICENSE">
             <img alt="GitHub" src="https://img.shields.io/github/license/beerandcodeteam/adoteumdev" alt="License" style="max-width:100%;" />
         </a>
