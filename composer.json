@@ -15,7 +15,7 @@
         "laravel/tinker": "^2.5",
         "livewire/livewire": "^2.5",
         "pusher/pusher-php-server": "^7.0",
-        "doctrine/dbal": "^3.2",
+        "doctrine/dbal": "^3.2"
     },
     "require-dev": {
         "facade/ignition": "^2.5",
@@ -69,7 +69,10 @@
     "config": {
         "optimize-autoloader": true,
         "preferred-install": "dist",
-        "sort-packages": true
+        "sort-packages": true,
+        "allow-plugins": {
+            "pestphp/pest-plugin": true
+        }
     },
     "minimum-stability": "dev",
     "prefer-stable": true
