@@ -30,7 +30,7 @@
         "pestphp/pest-plugin-livewire": "^1.0",
         "pestphp/pest-plugin-mock": "^1.0",
         "pestphp/pest-plugin-parallel": "^1.0.0",
-        "phpunit/phpunit": "^9.3.3"
+        "phpunit/phpunit": "^11.2.6"
     },
     "autoload": {
         "psr-4": {
